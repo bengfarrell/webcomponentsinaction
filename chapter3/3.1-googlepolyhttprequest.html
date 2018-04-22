@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Poly HTTP Request</title>
+
+    <script>
+        let url = 'https://poly.googleapis.com/v1/assets?keywords=parrot&format=OBJ&key=<your_key_here>';
+        let request = new XMLHttpRequest();
+        request.open( 'GET', url, true );
+        request.addEventListener( 'load', (event) => {
+            console.log(JSON.parse( event.target.response ));
+        });
+        request.send();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

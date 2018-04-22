@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Growing Animation</title>
+    <script>
+        class GameComponentBase extends HTMLElement {
+            constructor() {
+                super();
+                this.onUpdate();
+            }
+
+            update() {}
+
+            onUpdate() {
+                this.update();
+                requestAnimationFrame( () => this.onUpdate());
+            }
+        }
+
+        class GrowingAnimation extends GameComponentBase {
+            connectedCallback() {
+                this.size = 0;
+                this.style.backgroundColor = 'red';
+                this.style.position = 'absolute';
+            }
+
+            update() {
+                this.size ++;
+                if (this.size > 200) {
+                    this.size = 0;
+                }
+                this.style.width = this.size + 'px';
+                this.style.height = this.size + 'px';
+            }
+        }
+
+        customElements.define('growing-animation', GrowingAnimation);
+    </script>
+</head>
+
+<body>
+    <growing-animation></growing-animation>
+</body>
+</html>

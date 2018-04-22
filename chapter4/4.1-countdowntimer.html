@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Countdown Timer</title>
+    <script>
+        class CountdownTimer extends HTMLElement {
+            connectedCallback() {
+                this.counter = 100;
+                setInterval( () => this.update(), 1000);
+            }
+
+            update() {
+                this.innerHTML = this.counter;
+                this.counter --;
+            }
+        }
+
+        customElements.define('countdown-timer', CountdownTimer);
+    </script>
+</head>
+
+<body>
+    <countdown-timer></countdown-timer>
+</body>
+</html>

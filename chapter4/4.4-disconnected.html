@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cleanup Component</title>
+    <script>
+        class CleanupComponent extends HTMLElement {
+            connectedCallback() {
+                this.counter = 100;
+                this.timer = setInterval( () => this.update(), 1000);
+            }
+
+            update() {
+                this.innerHTML = this.counter;
+                this.counter --;
+                console.log(this.counter);
+            }
+
+            disconnectedCallback() {
+                clearInterval(this.timer);
+            }
+        }
+
+        customElements.define('cleanup-component', CleanupComponent);
+    </script>
+</head>
+
+<body>
+    <cleanup-component></cleanup-component>
+    <button onclick="document.body.removeChild(document.querySelector('cleanup-component'))">remove</button>
+</body>
+</html>

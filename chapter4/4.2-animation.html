@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Growing Animation</title>
+    <script>
+        class GrowingAnimation extends HTMLElement {
+            connectedCallback() {
+                this.size = 0;
+                this.style.backgroundColor = 'red';
+                this.style.position = 'absolute';
+                requestAnimationFrame( () => this.update());
+            }
+
+            update() {
+                this.size ++;
+                if (this.size > 200) {
+                    this.size = 0;
+                }
+                this.style.width = this.size + 'px';
+                this.style.height = this.size + 'px';
+                requestAnimationFrame( () => this.update());
+            }
+        }
+
+        customElements.define('growing-animation', GrowingAnimation);
+    </script>
+</head>
+
+<body>
+    <growing-animation></growing-animation>
+</body>
+</html>

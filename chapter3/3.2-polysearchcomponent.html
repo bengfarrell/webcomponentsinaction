@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Google Poly Search</title>
+    <script>
+        class PolySearch extends HTMLElement {
+            connectedCallback() {
+                this.doSearch();
+            }
+
+            doSearch() {
+                let url = 'https://poly.googleapis.com/v1/assets?keywords=parrot&format=OBJ&key=AIzaSyDco09I8HAL-f4LrkSIOJVqZvqLpzMVTLA';
+                let request = new XMLHttpRequest();
+                request.open( 'GET', url, true );
+                request.addEventListener( 'load', (event) => {
+                    console.log(JSON.parse( event.target.response ));
+            });
+                request.send();
+            }
+        }
+
+        customElements.define('poly-search', PolySearch);
+    </script>
+</head>
+
+<body>
+<poly-search></poly-search>
+</body>
+</html>

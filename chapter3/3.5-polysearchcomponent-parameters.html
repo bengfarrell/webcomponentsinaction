@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Google Poly Search</title>
+    <script>
+        class PolySearch extends HTMLElement {
+            set apiKey(value) {
+                this._apiKey = value;
+                this.doSearch();
+            }
+
+            set searchTerm(value) {
+                this._searchTerm = value;
+                this.doSearch();
+            }
+
+            connectedCallback() {}
+
+            doSearch() {
+                if (this._apiKey && this._searchTerm) {
+                    let url = 'https://poly.googleapis.com/v1/assets?keywords=' + this._searchTerm + '&format=OBJ&key=' + this._apiKey;
+                    let request = new XMLHttpRequest();
+                    request.open( 'GET', url, true );
+                    request.addEventListener( 'load', (event) => {
+                        this.renderResults(JSON.parse( event.target.response ).assets);
+                    });
+                    request.send();
+                }
+            }
+
+            renderResults(assets) {
+                let html = '';
+                for (let c = 0; c < assets.length; c++) {
+                    html += '<img src="' + assets[c].thumbnail.url + '" width=”200” height=”150”/>';
+                }
+                this.innerHTML = html;
+            }
+        }
+
+        customElements.define('poly-search', PolySearch);
+    </script>
+
+    <style>
+        poly-search {
+            border-style: solid;
+            border-width: 1px;
+            border-color: #9a9a9a;
+            padding: 10px;
+            background-color: #fafafa;
+            display: inline-block;
+            text-align: center;
+        }
+
+        poly-search img {
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+<poly-search></poly-search>
+
+<script>
+    document.querySelector('poly-search').apiKey = '<your_api_key>';
+    document.querySelector('poly-search').searchTerm = 'parrot';
+</script>
+</body>
+</html>
