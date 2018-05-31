@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Modules</title>
+    <script type="module">
+        import DemoModule from "./moduledemo.js";
+        DemoModule();
+    </script>
+
+    <script type="module">
+        import { hi, bye } from "./multiplemoduledemo.js";
+        hi();
+        bye();
+    </script>
+
+    <script type="module">
+        import { hi as SomeName, bye as SomeOtherName } from "./multiplemoduledemo.js";
+        SomeName();
+        SomeOtherName();
+    </script>
+
+    <script type="module">
+        import * as Greeting from "./multiplemoduledemo.js";
+        Greeting.hi();
+        Greeting.bye();
+    </script>
+</head>
+<body>
+</body>
+</html>
