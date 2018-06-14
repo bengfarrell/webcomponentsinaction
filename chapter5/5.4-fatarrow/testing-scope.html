@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Testing Scope</title>
+
+    <script>
+        class ScopeTest {
+            constructor() {
+                this.message = 'hi';
+                console.log(this)
+                setInterval(this.onTimer, 1000);
+            }
+
+            onTimer() {
+                console.log(this);
+            }
+        }
+        let test = new ScopeTest();
+    </script>
+</head>
+<body>
+</body>
+</html>
