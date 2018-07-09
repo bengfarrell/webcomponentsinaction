@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>String Theory</title>
+
+    <script>
+        this.innerHTML = '<form> \
+                            <div> \
+                                <label for="example">Lets submit some text</label> \
+    				            <input id="example" type="text" name="text"> \
+  			                    </div> \
+  			                <div> \
+    				        <input type="submit" value="Send"> \
+  			                </div> \
+                        </form>';
+
+        console.log(this.innerHTML);
+
+
+        this.innerHTML = '<form>' +
+                            '<div>' +
+                                '<label for="example">Lets submit some text</label>' +
+    				            '<input id="example" type="text" name="text">' +
+  			                    '</div>' +
+  			                '<div>' +
+    				        '<input type="submit" value="Send">' +
+  			                '</div>' +
+                        '</form>';
+
+        console.log(this.innerHTML);
+
+        this.innerHTML = `<form>
+                            <div>
+                                <label for="example">Lets submit some text</label>
+    				            <input id="example" type="text" name="text">
+  			                    </div>
+  			                <div>
+    				        <input type="submit" value="Send">
+  			                </div>
+                        </form>`;
+
+        console.log(this.innerHTML);
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
