@@ -19,8 +19,8 @@
 
             doSearch() {
                 if (this._apiKey && this._searchTerm) {
-                    let url = 'https://poly.googleapis.com/v1/assets?keywords=' + this._searchTerm + '&format=OBJ&key=' + this._apiKey;
-                    let request = new XMLHttpRequest();
+                    const url = 'https://poly.googleapis.com/v1/assets?keywords=' + this._searchTerm + '&format=OBJ&key=' + this._apiKey;
+                    const request = new XMLHttpRequest();
                     request.open( 'GET', url, true );
                     request.addEventListener( 'load', (event) => {
                         this.renderResults(JSON.parse( event.target.response ).assets);

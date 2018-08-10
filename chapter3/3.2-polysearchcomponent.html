@@ -10,8 +10,8 @@
             }
 
             doSearch() {
-                let url = 'https://poly.googleapis.com/v1/assets?keywords=parrot&format=OBJ&key=AIzaSyDco09I8HAL-f4LrkSIOJVqZvqLpzMVTLA';
-                let request = new XMLHttpRequest();
+                const url = 'https://poly.googleapis.com/v1/assets?keywords=parrot&format=OBJ&key=AIzaSyDco09I8HAL-f4LrkSIOJVqZvqLpzMVTLA';
+                const request = new XMLHttpRequest();
                 request.open( 'GET', url, true );
                 request.addEventListener( 'load', (event) => {
                     console.log(JSON.parse( event.target.response ));

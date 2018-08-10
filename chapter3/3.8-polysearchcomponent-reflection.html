@@ -40,8 +40,8 @@
 
             doSearch() {
                 if (this.getAttribute('apiKey') && this.getAttribute('searchTerm')) {
-                    let url = this.getAttribute('baseuri') + '?keywords=' + this.getAttribute('searchTerm') + '&format=' + this.getAttribute('format') + '&key=' + this.getAttribute('apiKey');
-                    let request = new XMLHttpRequest();
+                    const url = this.getAttribute('baseuri') + '?keywords=' + this.getAttribute('searchTerm') + '&format=' + this.getAttribute('format') + '&key=' + this.getAttribute('apiKey');
+                    const request = new XMLHttpRequest();
                     request.open( 'GET', url, true );
                     request.addEventListener( 'load', (event) => {
                         this.renderResults(JSON.parse( event.target.response ).assets);
