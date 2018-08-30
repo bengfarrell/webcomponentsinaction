@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Business Card</title>
+        <script type="module" src="components/bizcard/bizcard.js"></script>
+    </head>
+
+    <body>
+        <p>
+            <select onchange="updateLayout(event)">
+                <option value="none">none</option>
+                <option value="default-card">default</option>
+                <option value="variation">variation</option>
+            </select>
+        </p>
+        <wcia-biz-card layout="none"></wcia-biz-card>
+
+        <script>
+            function updateLayout(event) {
+                document.querySelector('wcia-biz-card').setAttribute('layout', event.target.value);
+            }
+        </script>
+    </body>
+</html>

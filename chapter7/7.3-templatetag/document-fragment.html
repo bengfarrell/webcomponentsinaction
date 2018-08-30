@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document Fragment Demo</title>
+</head>
+<body>
+<script>
+    const fragment = document.createDocumentFragment();
+    for (let c = 0; c < 5; c++) {
+        const li = document.createElement('p');
+        li.innerText = 'paragraph ' + c;
+        fragment.appendChild(li);
+    }
+    document.body.appendChild(fragment);
+</script>
+</body>
+</html>

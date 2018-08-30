@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Business Card</title>
+        <script type="module" src="components/bizcard/bizcard.js"></script>
+    </head>
+
+    <body>
+        <p>
+            <select onchange="updateLayout(event)">
+                <option value="none">none</option>
+                <option value="default-card">default</option>
+                <option value="variation">variation</option>
+            </select>
+        </p>
+
+        <wcia-biz-card layout="none">
+            <slot slot="firstname">Ben</slot>
+            <span slot="lastname">Farrell</span>
+            <span slot="title">Web Component Developer</span>
+            <span slot="phone">555.555.5555</span>
+            <span slot="email">ben@benfarrell.com</span>
+            <span slot="website">benfarrell.com</span>
+        </wcia-biz-card>
+
+        <script>
+            function updateLayout(event) {
+                document.querySelector('wcia-biz-card').setAttribute('layout', event.target.value);
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Using Templates</title>
+</head>
+<body>
+    <template id="button">
+        <button>Click Me</button>
+        <p>
+            This is a template with a button
+        </p>
+    </template>
+
+    <template id="textfield">
+        <label>Enter</label>
+        <input type="text">
+        <p>
+            This is a template with a text input
+        </p>
+    </template>
+
+    <template id="list">
+        <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+        </ul>
+    </template>
+
+
+    <script>
+        /* cloning and append to page */
+        const template = document.getElementById('button');
+        //const template = document.querySelectorAll('template');
+        const clone = template.content.cloneNode(true);
+        document.body.appendChild(clone);
+
+        /* multiple clones from the same template
+        const template = document.getElementById('button');
+        const clone = template.content.cloneNode(true);
+        document.body.appendChild(clone);
+        const clone2 = template.content.cloneNode(true);
+        document.body.appendChild(clone2);
+        */
+
+    </script>
+</body>
+</html>

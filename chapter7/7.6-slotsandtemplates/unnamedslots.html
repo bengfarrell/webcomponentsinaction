@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slots (not named) Demo</title>
+</head>
+
+<script>
+    class SlotsDemo extends HTMLElement {
+        connectedCallback() {
+            this.root = this.attachShadow({mode: 'open'});
+            this.root.innerHTML = `<div>
+                                        <button>A Button</button>
+                                        <p>
+                                            Some Text
+                                            <br />
+                                            <slot>placeholder text</slot>
+                                        </p>
+                                    </div>`;
+        }
+    }
+
+    if (!customElements.get('slots-demo')) {
+        customElements.define('slots-demo', SlotsDemo);
+    }
+
+</script>
+<body>
+    <slots-demo>Text to put in the slot</slots-demo>
+</body>
+</html>
