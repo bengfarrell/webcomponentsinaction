@@ -46,6 +46,6 @@ class BizCard extends HTMLElement {
     }
 }
 
-if (!customElements.get('wcia-biz-card')) {
-    customElements.define('wcia-biz-card', BizCard);
+if (!customElements.get('biz-card')) {
+    customElements.define('biz-card', BizCard);
 }

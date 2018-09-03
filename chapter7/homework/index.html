@@ -14,18 +14,18 @@
             </select>
         </p>
 
-        <wcia-biz-card layout="none">
+        <biz-card layout="none">
             <slot slot="firstname">Ben</slot>
             <span slot="lastname">Farrell</span>
             <span slot="title">Web Component Developer</span>
             <span slot="phone">555.555.5555</span>
             <span slot="email">ben@benfarrell.com</span>
             <span slot="website">benfarrell.com</span>
-        </wcia-biz-card>
+        </biz-card>
 
         <script>
             function updateLayout(event) {
-                document.querySelector('wcia-biz-card').setAttribute('layout', event.target.value);
+                document.querySelector('biz-card').setAttribute('layout', event.target.value);
             }
         </script>
     </body>
