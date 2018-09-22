@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Constructor Initialization</title>
+
+    <script>
+        class SampleComponent extends HTMLElement {
+            constructor() {
+                super();
+                this.attachShadow({mode: 'open'});
+                this.shadowRoot.innerHTML = 'setting some HTML';
+            }
+
+        }
+
+        if (!customElements.get('sample-component')) {
+            customElements.define('sample-component', SampleComponent);
+        }
+
+    </script>
+</head>
+<body>
+<sample-component></sample-component>
+</body>
+
+
+</body>
+</html>

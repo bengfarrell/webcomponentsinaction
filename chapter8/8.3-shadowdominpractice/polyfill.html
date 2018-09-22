@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.0/webcomponents-loader.js"></script>
+    <script>
+        class SampleComponent extends HTMLElement {
+            constructor() {
+                super();
+                this.root = this.attachShadow({mode: 'open'});
+            }
+
+            connectedCallback() {
+                if (!this.initialized) {
+                    this.root.innerHTML = 'setting some HTML';
+                    this.initialized = true;
+                }
+            }
+
+        }
+
+        if (!customElements.get('sample-component')) {
+            customElements.define('sample-component', SampleComponent);
+        }
+
+    </script>
+</head>
+<body>
+
+<sample-component></sample-component>
+
+<script>
+    setTimeout(function() {
+        document.querySelector('sample-component').innerHTML = 'Component is hijacked';
+    }, 500);
+</script>
+
+</body>
+</html>

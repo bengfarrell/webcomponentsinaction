@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+        class SampleComponent extends HTMLElement {
+            connectedCallback() {
+                const root = this.attachShadow({mode: 'closed'});
+                root.innerHTML = `<div class="inside-component">My Component</div>`
+            }
+        }
+
+        if (!customElements.get('sample-component')) {
+            customElements.define('sample-component', SampleComponent);
+        }
+
+
+        // Sneakily overriding the attachShadow method to give access
+        // to the component
+        SampleComponent.prototype.attachShadow = function(mode) {
+            return this;
+        };
+    </script>
+</head>
+<body>
+    <sample-component></sample-component>
+</body>
+
+<script>
+    document.querySelector('.inside-component').innerHTML += ' has been hijacked';
+</script>
+</html>

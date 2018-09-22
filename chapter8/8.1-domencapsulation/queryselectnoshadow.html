@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+        class SampleComponent extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = `<div class="inside-component">My Component</div>`
+            }
+        }
+
+        if (!customElements.get('sample-component')) {
+            customElements.define('sample-component', SampleComponent);
+        }
+
+    </script>
+</head>
+<body>
+    <sample-component></sample-component>
+</body>
+
+<script>
+    document.querySelector('.inside-component').innerHTML += ' has been hijacked';
+</script>
+</html>
