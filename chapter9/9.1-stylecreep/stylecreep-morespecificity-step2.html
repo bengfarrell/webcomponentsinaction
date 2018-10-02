@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Style Creep</title>
+
+    <style>
+        button.big-button {
+            border-top: 1px solid #96d1f8;
+            background: #65a9d7;
+            background: linear-gradient(90deg, #3e779d, #65a9d7);
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: rgba(0,0,0,1) 0 1px 0;
+            text-shadow: rgba(0,0,0,.4) 0 1px 0;
+            color: white;
+            font-size: 21px;
+            font-family: Helvetica;
+            text-decoration: none;
+            vertical-align: middle;
+        }
+        button.big-button:hover {
+            border-top-color: #28597a;
+            background: #28597a;
+            color: #ccc;
+        }
+        button.big-button:active {
+            border-top-color: #1b435e;
+            background: #1b435e;
+        }
+    </style>
+
+    <script>
+        class SampleComponent extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = `<button class="big-button">-</button>
+                                  <span class="increment-number">5</span>
+                                  <button class="big-button">+</button>
+                    <style>
+                         sample-component {
+                            display: flex;
+                         }
+                         sample-component .increment-number {
+                            font-size: 24px;
+                            background-color: #770311;
+                            color: white;
+                            font-family: Helvetica;
+                            display: inline-block;
+                            padding: 11px;
+                            border: none;
+                         }
+                         sample-component button {
+                            border-radius: 0 50px 50px 0;
+                            border: none;
+                            width: 50px;
+                            height: 50px;
+                            font-size: 36px;
+                            font-weight: bold;
+                            background-color: red;
+                            color: white;
+                        }
+                        sample-component button:first-child {
+                            border-radius: 50px 0 0 50px;
+                        }
+
+                        sample-component button:active {
+                            background-color: #960000;
+                        }
+
+                        sample-component button:focus {
+                            outline: thin dotted;
+                        }
+                    </style>`;
+            }
+        }
+
+        if (!customElements.get('sample-component')) {
+            customElements.define('sample-component', SampleComponent);
+        }
+
+    </script>
+</head>
+<body>
+<sample-component></sample-component>
+
+<br /><br />
+
+<button class="big-button">Button from Design System</button>
+
+</body>
+</html>

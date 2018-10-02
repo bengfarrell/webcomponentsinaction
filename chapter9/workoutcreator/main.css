@@ -1,0 +1,17 @@
+:root {
+    --inverted-text-color: #eaeaea;
+    --text-color: #3a3a3a;
+    --label-color: #2a2a2a;
+    --header-font-size: 21px;
+    --font: 'Roboto Slab', serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+wkout-creator-app {
+    height: calc(100vh - 20px);
+    padding: 10px;
+}
