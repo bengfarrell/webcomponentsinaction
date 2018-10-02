@@ -27,6 +27,7 @@ export default {
                     wkout-plan {
                         flex: 1;
                         height: 100%;
+                        background-color: #eaeaea;
                     }
                     
                     #divider-line {
