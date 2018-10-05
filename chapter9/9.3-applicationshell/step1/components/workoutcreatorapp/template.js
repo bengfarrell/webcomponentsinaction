@@ -1,14 +1,10 @@
+import ExerciseLibrary from '../exerciselibrary/exerciselibrary.js';
+import Plan from '../plan/plan.js';
+
 export default {
     render() {
         return `${this.css()}
                 ${this.html()}`;
-    },
-
-    mapDOM(scope) {
-        return {
-            library: scope.querySelector('wkout-exercise-lib'),
-            plan: scope.querySelector('wkout-plan')
-        };
     },
 
     html() {
