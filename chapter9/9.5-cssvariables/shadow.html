@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Variables</title>
+
+    <style>
+        sample-component {
+            --text-color: blue;
+        }
+
+    </style>
+    <script>
+        class SampleComponent extends HTMLElement {
+            connectedCallback() {
+                this.attachShadow({mode: 'open'});
+                this.shadowRoot.innerHTML = `<div class="inside-component">My Component</div>
+                <style>
+                    .inside-component {
+                        color: var(--text-color);
+                        }
+                </style>`
+            }
+        }
+
+        if (!customElements.get('sample-component')) {
+            customElements.define('sample-component', SampleComponent);
+        }
+
+    </script>
+</head>
+<body>
+<sample-component></sample-component>
+</body>
+</html>

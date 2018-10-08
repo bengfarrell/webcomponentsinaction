@@ -1,8 +1,21 @@
+import Exercise from '../exercise/exercise.js';
+
 export default {
     render() {
         return `${this.css()}
                 ${this.html()}`;
     },
+
+    mapDOM(scope) {
+        return {
+            exercises: scope.querySelector('#container')
+        }
+    },
+
+    renderExercise(exercise) {
+        return `<wkout-exercise class="${exercise.type}" ${Exercise.toAttributeString(exercise.serialize())}></wkout-exercise>`
+    },
+
 
     html() {
         return `<h1>My Plan</h1>

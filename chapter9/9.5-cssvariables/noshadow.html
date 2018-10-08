@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Variables</title>
+
+    <style>
+        body {
+            --text-color: blue;
+        }
+
+        .container {
+            --text-color: red;
+        }
+
+        .child {
+            color: var(--text-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="child">Some Text</div>
+    </div>
+</body>
+</html>

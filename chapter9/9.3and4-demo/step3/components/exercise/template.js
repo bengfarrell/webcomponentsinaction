@@ -25,10 +25,9 @@ export default {
     css(exercise) {
         return `<style>
                     :host {
-                        font-family: var(--font);
                         display: inline-block;
                         background: radial-gradient(circle, rgba(235,235,235,1) 0%, rgba(208,208,208,1) 100%);
-                        background-image: url('${exercise.thumb}');
+                        /*background-image: url('${exercise.thumb}');*/
                         border-left-style: solid;
                         border-left-width: 5px;
                     }
@@ -43,8 +42,8 @@ export default {
                     
                     #info {
                         font-size: small;
-                        background-color: var(--label-color);
-                        color: var(--inverted-text-color);
+                        background-color: black;
+                        color: white;
                         display: flex;
                         align-items: center;
                     }    
