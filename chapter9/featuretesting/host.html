@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Host Selector Testing</title>
+
+    <script>
+        class SampleComponent extends HTMLElement {
+            connectedCallback() {
+                const root = this.attachShadow({mode: 'open'});
+                root.innerHTML = `<span class="test">Text should be green, but its not in Safari</span>
+                    <style>
+                         :host-context(body) {
+                            color: green;
+                         }
+                    </style>`;
+            }
+        }
+
+        if (!customElements.get('sample-component')) {
+            customElements.define('sample-component', SampleComponent);
+        }
+
+    </script>
+</head>
+<body>
+<sample-component class="green"></sample-component>
+
+</body>
+</html>
