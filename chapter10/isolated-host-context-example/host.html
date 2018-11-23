@@ -8,7 +8,7 @@
         class SampleComponent extends HTMLElement {
             connectedCallback() {
                 const root = this.attachShadow({mode: 'open'});
-                root.innerHTML = `<span class="test">Text should be green, but its not in Safari</span>
+                root.innerHTML = `<span class="test">Text should be green, but its not in Safari or Firefox</span>
                     <style>
                          :host-context(body) {
                             color: green;

@@ -45,7 +45,6 @@ export default {
                     }
                 
                     .biz-card .logo {
-                        width: 100%;
                         height: 100px;
                         margin-top: 10%;
                         text-align: center;
@@ -55,7 +54,6 @@ export default {
                     }
                 
                     .biz-card .top-text {
-                        width: 100%;
                         text-align: center;
                     }
                 
@@ -69,7 +67,6 @@ export default {
                     }
                 
                     .biz-card .bottom-text {
-                        width: 100%;
                         text-align: center;
                         margin-top: 10%;
                     }

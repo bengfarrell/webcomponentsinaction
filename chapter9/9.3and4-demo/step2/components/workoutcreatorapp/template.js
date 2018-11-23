@@ -7,13 +7,6 @@ export default {
                 ${this.html()}`;
     },
 
-    mapDOM(scope) {
-        return {
-            library: scope.querySelector('wkout-exercise-lib'),
-            plan: scope.querySelector('wkout-plan')
-        };
-    },
-
     html() {
         return `<wkout-exercise-lib></wkout-exercise-lib>
                 <div id="divider-line"></div>
@@ -30,6 +23,7 @@ export default {
                     wkout-plan {
                         flex: 1;
                         height: 100%;
+                        background-color: #eaeaea;
                     }
                     
                     #divider-line {

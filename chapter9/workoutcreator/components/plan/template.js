@@ -41,7 +41,6 @@ export default {
                                         
                     #container {
                         background: linear-gradient(90deg, rgba(235,235,235,1) 0%, rgba(208,208,208,1) 100%);
-                        width: 100%;
                         height: calc(100% - 60px);
                         overflow-y: scroll;
                     }

@@ -26,7 +26,6 @@ export default {
                     
                     #container {
                         overflow-y: scroll;
-                        width: 100%;
                         height: calc(100% - 60px);
                     }
                     

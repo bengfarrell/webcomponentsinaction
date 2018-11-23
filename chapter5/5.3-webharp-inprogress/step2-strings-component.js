@@ -9,7 +9,6 @@ export default class WebHarpStrings extends HTMLElement {
 
         strings += '<style>\
                         webharp-strings { \
-                            width: 100%; \
                             height: 100%; \
                             display: flex; \
                         } \

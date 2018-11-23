@@ -8,19 +8,19 @@ export default {
 
     mapDOM(scope) {
         return {
-            exercises: scope.querySelector('#container')
+            exercises: scope.querySelector('#container'),
+            time: scope.querySelector('#time')
         }
     },
 
     renderExercise(exercise) {
-        return `<wkout-exercise class="${exercise.type}" ${Exercise.toAttributeString(exercise.serialize())}></wkout-exercise>`
+        return `<wkout-exercise class="${exercise.type} plan" ${Exercise.toAttributeString(exercise.serialize())}></wkout-exercise>`
     },
-
 
     html() {
         return `<h1>My Plan</h1>
                 <div id="container"></div>
-                <div id="time">Total Time:</div>`;
+                <div>Total Time: <span id="time"></span></div>`;
     },
 
     css() {
@@ -28,6 +28,12 @@ export default {
                     :host {
                         display: flex;
                         flex-direction: column;
+                        font-family: var(--font);
+                        color: var(--text-color);
+                    }
+                    
+                    h1 {
+                        font-size: var(--header-font-size);  
                     }
                     
                     #time {

@@ -6,17 +6,6 @@ export default {
                 ${this.html()}`;
     },
 
-    mapDOM(scope) {
-        return {
-            exercises: scope.querySelector('#container')
-        }
-    },
-
-    renderExercise(exercise) {
-        return `<wkout-exercise class="${exercise.type}" ${Exercise.toAttributeString(exercise.serialize())}></wkout-exercise>`
-    },
-
-
     html() {
         return `<h1>My Plan</h1>
                 <div id="container"></div>
@@ -36,7 +25,6 @@ export default {
                                         
                     #container {
                         background: linear-gradient(90deg, rgba(235,235,235,1) 0%, rgba(208,208,208,1) 100%);
-                        width: 100%;
                         height: calc(100% - 60px);
                         overflow-y: scroll;
                     }

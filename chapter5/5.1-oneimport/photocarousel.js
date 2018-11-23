@@ -27,7 +27,6 @@ class PhotoCarousel extends HTMLElement {
             } \
             wcia-photo-carousel .image-container { \
                 margin-top: 15px; \
-                width: 100%; \
                 flex: 1; \
                 background-color: black; \
                 background-size: contain; \
