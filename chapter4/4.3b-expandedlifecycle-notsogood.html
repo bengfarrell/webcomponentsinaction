@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Growing Animation</title>
+    <title>Visual Countdown Timer</title>
     <script>
         class GameComponentBase extends HTMLElement {
             constructor() {
@@ -15,29 +15,29 @@
             }
         }
 
-        class GrowingAnimation extends GameComponentBase {
+        class VisualCountdownTimer extends GameComponentBase {
             connectedCallback() {
-                this.size = 0;
-                this.style.backgroundColor = 'red';
-                this.style.position = 'absolute';
+                this.timer = 200;
+                this.style.backgroundColor = 'green';
+                this.style.display = 'inline-block';
+                this.style.height = '50px';
             }
 
             update() {
-                this.size ++;
-                if (this.size > 200) {
-                    this.size = 0;
+                this.timer --;
+                if (this.timer <= 0) {
+                    this.timer = 200;
                 }
-                this.style.width = this.size + 'px';
-                this.style.height = this.size + 'px';
+                this.style.width = this.timer + 'px';
                 super.update();
             }
         }
 
-        customElements.define('growing-animation', GrowingAnimation);
+        customElements.define('countdown-timer', VisualCountdownTimer);
     </script>
 </head>
 
 <body>
-    <growing-animation></growing-animation>
+    <countdown-timer></countdown-timer>
 </body>
 </html>
