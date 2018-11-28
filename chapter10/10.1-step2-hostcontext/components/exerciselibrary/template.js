@@ -11,7 +11,7 @@ export default {
         let mkup = `<h1>Exercises</h1>
                     <div id="container">`;
         for (let c = 0; c < exercises.length; c++) {
-            mkup += `<wkout-exercise class="${exercises[c].type}" ${Exercise.toAttributeString(exercises[c])}" ></wkout-exercise>`;
+            mkup += `<wkout-exercise class="${exercises[c].type}" ${Exercise.toAttributeString(exercises[c])}></wkout-exercise>`;
         }
         return mkup + `</div>`;
     },
