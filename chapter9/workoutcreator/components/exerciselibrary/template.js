@@ -19,7 +19,8 @@ export default {
     css() {
         return `<style>                                
                     :host {
-                        display: inline-block;
+                        display: flex;
+                        flex-direction: column;
                         font-family: var(--font);
                         color: var(--text-color);
                     }
