@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Constructor Initialization</title>
+    <title>Title</title>
 
     <script>
         class SampleComponent extends HTMLElement {
             constructor() {
                 super();
                 this.attachShadow({mode: 'open'});
-                this.shadowRoot.innerHTML = 'setting some HTML';
+                this.shadowRoot.innerHTML = `<div class="inside-component">My Component</div>`
             }
-
         }
 
         if (!customElements.get('sample-component')) {
@@ -21,9 +20,6 @@
     </script>
 </head>
 <body>
-<sample-component></sample-component>
-</body>
-
-
+    <sample-component></sample-component>
 </body>
 </html>
