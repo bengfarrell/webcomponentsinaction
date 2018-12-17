@@ -83,10 +83,10 @@ export default {
 
         // update text inputs to reflect changes from sliders and coord picker
         o.dom.textInputHex.value = color.hex;
-        o.dom.textInputR.value = color.rgb.r;
-        o.dom.textInputG.value = color.rgb.g;
-        o.dom.textInputB.value = color.rgb.b;
-        o.dom.textInputA.value = color.transparency;
+        o.dom.textInputR.value = parseInt(color.rgb.r);
+        o.dom.textInputG.value = parseInt(color.rgb.g);
+        o.dom.textInputB.value = parseInt(color.rgb.b);
+        o.dom.textInputA.value = parseInt(color.transparency);
 
         // update model with new color vals
         o.model.color = color;
@@ -134,9 +134,9 @@ export default {
             rgb: Color.hexToRGB(o.model.color.hex)
         };
 
-        o.dom.textInputR.value = color.rgb.r;
-        o.dom.textInputG.value = color.rgb.g;
-        o.dom.textInputB.value = color.rgb.b;
+        o.dom.textInputR.value = parseInt(color.rgb.r);
+        o.dom.textInputG.value = parseInt(color.rgb.g);
+        o.dom.textInputB.value = parseInt(color.rgb.b);
 
         const hsv = Color.RGBtoHSV(color.rgb.r, color.rgb.g, color.rgb.b);
 

@@ -26,7 +26,7 @@ export default {
                     #bg-overlay-a {
                         width: 100%;
                         height: 100%;
-                        border-radius: 10px;
+                        border-radius: var(--border-radius);
                         position: absolute;
                         background: linear-gradient(to right, #fff 0%, rgba(255,255,255,0) 100%);
                     }
@@ -34,7 +34,7 @@ export default {
                     #bg-overlay-b {
                         width: 100%;
                         height: 100%;
-                        border-radius: 10px;
+                        border-radius: var(--border-radius);
                         position: absolute;
                         background: linear-gradient(to bottom, transparent 0%, #000 100%);
                     }
@@ -45,8 +45,8 @@ export default {
                         position: absolute;
                         border-style: solid;
                         border-width: 3px;
-                        border-color: white;
-                        border-radius: 10px;
+                        border-color: var(--border-inverted-color);
+                        border-radius: var(--border-radius);
                         pointer-events: none;
                     }
                 </style>`;
