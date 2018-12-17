@@ -70,7 +70,7 @@ export function repeat(items, keyFnOrTemplate, template) {
                 // else part is in the correct position already
                 currentMarker = itemPart.endNode.nextSibling;
             }
-            itemPart.setValue(result);
+            itemPart.setVal(result);
         }
         // Cleanup
         if (currentMarker !== part.endNode) {

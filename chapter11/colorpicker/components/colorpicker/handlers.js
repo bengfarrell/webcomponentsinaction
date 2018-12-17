@@ -20,7 +20,7 @@ export default {
         }
     },
 
-    handle(o) {
+    update(o) {
         if (!o.model) {
             o.model = this.init(o.dom);
         }
@@ -28,11 +28,11 @@ export default {
         if (o.changeType === this.MOUSE_INPUT) {
             return this.handleMouseInput(o);
         } else if (o.element === o.dom.textInputHex) {
-            return this.handleHexEntryState(o);
+            return this.handleHex(o);
         } else if (o.changeType === this.ATTRIBUTE_INPUT) {
-            return this.handleAttributeEntryState(o);
+            return this.handleAttributes(o);
         }  else {
-            return this.handleRGBEntryState(o);
+            return this.handleRGB(o);
         }
     },
 
@@ -71,7 +71,7 @@ export default {
             hue: o.model.rawvalues.hue / 100,
             transparency: 100 - parseInt(o.model.rawvalues.transparency),
             saturation: o.model.rawvalues.satbright.x / 100,
-            brightness: o.model.rawvalues.satbright.y / 100
+            brightness: (100 - o.model.rawvalues.satbright.y) / 100
         };
 
         color.rgb = Color.HSVtoRGB(color.hue, color.saturation, color.brightness);
@@ -94,7 +94,7 @@ export default {
         return o.model;
     },
 
-    handleRGBEntryState(o) {
+    handleRGB(o) {
         const color = {
             rgb: {
                 r: o.dom.textInputR.value,
@@ -106,19 +106,25 @@ export default {
         const hsv = Color.RGBtoHSV(color.rgb.r, color.rgb.g, color.rgb.b);
         o.dom.hue.value = hsv.h * 100;
         o.dom.satbright.x = hsv.s * 100;
-        o.dom.satbright.y = hsv.v * 100;
+        o.dom.satbright.y = 100 - hsv.v * 100;
 
         return o.model;
 
     },
 
-    handleAttributeEntryState(o) {
-        o.dom.textInputHex.value = o.element.hex;
-        o.dom.textInputA.value = o.element.alpha;
-        return this.updateFromHex(o);
+    handleAttributes(o) {
+        if (o.attribute === 'alpha') {
+            o.model.rawvalues.transparency = o.element.alpha;
+            o.dom.transparency.value = 100 - o.element.alpha;
+            o.dom.textInputA.value = o.element.alpha;
+            return o.model;
+        } else {
+            o.model.color.hex = o.element.hex;
+            return this.updateFromHex(o);
+        }
     },
 
-    handleHexEntryState(o) {
+    handleHex(o) {
         o.model.color.hex = o.dom.textInputHex.value;
         return this.updateFromHex(o);
     },
@@ -133,9 +139,10 @@ export default {
         o.dom.textInputB.value = color.rgb.b;
 
         const hsv = Color.RGBtoHSV(color.rgb.r, color.rgb.g, color.rgb.b);
+
         o.dom.hue.value = hsv.h * 100;
         o.dom.satbright.x = hsv.s * 100;
-        o.dom.satbright.y = hsv.v * 100;
+        o.dom.satbright.y = 100 - hsv.v * 100;
 
         return o.model;
     }

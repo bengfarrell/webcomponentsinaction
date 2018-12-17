@@ -530,7 +530,7 @@ export class NodePart {
                 itemPart = new NodePart(this.instance, itemStart, this.endNode);
                 itemParts.push(itemPart);
             }
-            itemPart.setValue(item);
+            itemPart.setVal(item);
             partIndex++;
         }
         if (partIndex === 0) {
@@ -584,11 +584,11 @@ export class TemplateInstance {
                 valueIndex++;
             }
             else if (part.size === undefined) {
-                part.setValue(values[valueIndex]);
+                part.setVal(values[valueIndex]);
                 valueIndex++;
             }
             else {
-                part.setValue(values, valueIndex);
+                part.setVal(values, valueIndex);
                 valueIndex += part.size;
             }
         }

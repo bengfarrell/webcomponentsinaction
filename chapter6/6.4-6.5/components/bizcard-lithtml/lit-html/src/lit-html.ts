@@ -656,7 +656,7 @@ export class NodePart implements SinglePart {
         itemPart = new NodePart(this.instance, itemStart, this.endNode);
         itemParts.push(itemPart);
       }
-      itemPart.setValue(item);
+      itemPart.setVal(item);
       partIndex++;
     }
 

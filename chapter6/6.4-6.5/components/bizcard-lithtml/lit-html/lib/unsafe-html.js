@@ -22,6 +22,6 @@ import { directive } from '../lit-html.js';
 export const unsafeHTML = (value) => directive((part) => {
     const tmp = document.createElement('template');
     tmp.innerHTML = value;
-    part.setValue(document.importNode(tmp.content, true));
+    part.setVal(document.importNode(tmp.content, true));
 });
 //# sourceMappingURL=unsafe-html.js.map

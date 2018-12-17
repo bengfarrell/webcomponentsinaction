@@ -1,5 +1,5 @@
 import Template from './template.js';
-import States from './states.js';
+import Handlers from './handlers.js';
 
 /**
  * design is heavily borrowed/stolen from https://cssgradient.io/
@@ -13,13 +13,17 @@ export default class ColorPicker extends HTMLElement {
         switch (name) {
             case 'hex':
             case 'alpha':
+                if (this._ignoreNextAttributeChange) {
+                    this._ignoreNextAttributeChange = false;
+                    return;
+                }
                 if (oldVal !== newValue) {
-                    States.handle({
+                    Handlers.update({
                         model: this.data,
                         dom: this.dom,
                         element: this,
                         attribute: name,
-                        changeType: States.ATTRIBUTE_INPUT
+                        changeType: Handlers.ATTRIBUTE_INPUT
                     });
                 }
                 break;
@@ -44,36 +48,43 @@ export default class ColorPicker extends HTMLElement {
 
     constructor() {
         super();
+        this._ignoreNextAttributeChange = false;
         this.attachShadow({mode: 'open'});
         this.shadowRoot.innerHTML = Template.render();
         this.dom = Template.mapDOM(this.shadowRoot);
         const observer = new MutationObserver( e => this.onMutationChange(e));
-        observer.observe(this.shadowRoot, { attributes: true, attributeOldValue: true, subtree: true });
+        observer.observe(this.shadowRoot, { attributes: true, subtree: true });
         this.shadowRoot.addEventListener('change', e => this.onInputValueChanged(e));
     }
 
     onMutationChange(records) {
        records.forEach( rec => {
-           this.data = States.handle({
+           this.data = Handlers.update({
                model: this.data,
                dom: this.dom,
                element: rec.target,
                attribute: rec.attributeName,
-               changeType: States.MOUSE_INPUT
+               changeType: Handlers.MOUSE_INPUT
            });
        });
+
+       this._ignoreNextAttributeChange = true;
        this.hex = this.data.color.hex;
+       this._ignoreNextAttributeChange = true;
        this.alpha = this.data.color.transparency;
     }
 
     onInputValueChanged(e) {
-        this.data = States.handle( {
+        this.data = Handlers.update( {
             model: this.data,
             dom: this.dom,
             element: e.target,
-            changeType: States.TEXT_INPUT
+            changeType: Handlers.TEXT_INPUT
         });
+
+        this._ignoreNextAttributeChange = true;
         this.hex = this.data.color.hex;
+        this._ignoreNextAttributeChange = true;
         this.alpha = this.data.color.transparency;
     }
 }

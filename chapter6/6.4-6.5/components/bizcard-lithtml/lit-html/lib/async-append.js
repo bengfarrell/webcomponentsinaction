@@ -73,7 +73,7 @@ export const asyncAppend = (value, mapper) => directive(async (part) => {
             // Note: Because these Parts are not updatable like with a sync
             // iterable (if we render a new value, we always clear), it may
             // be possible to optimize away the Parts and just re-use the
-            // Part.setValue() logic.
+            // Part.setVal() logic.
             let itemStartNode = part.startNode;
             // Check to see if we have a previous item and Part
             if (itemPart !== undefined) {

@@ -16,7 +16,7 @@ import { directive } from '../lit-html.js';
  * Display `defaultContent` until `promise` resolves.
  */
 export const until = (promise, defaultContent) => directive((part) => {
-    part.setValue(defaultContent);
-    part.setValue(promise);
+    part.setVal(defaultContent);
+    part.setVal(promise);
 });
 //# sourceMappingURL=until.js.map
