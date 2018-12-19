@@ -1,4 +1,7 @@
 export default {
+    get _THUMB_SIZE() { return 5; },
+    get THUMB_SIZE() { return this._THUMB_SIZE + 3 + 3 }, // include border thickness
+
     render() {
         return `${this.designSystem()}
                 ${this.css()}
@@ -33,7 +36,8 @@ export default {
                     }
                     
                     #thumb {
-                        width: 5px;
+                        margin-top: -1px;
+                        width: ${this._THUMB_SIZE}px;
                         height: calc(100% - 5px);
                         position: absolute;
                         border-style: solid;
@@ -41,6 +45,7 @@ export default {
                         border-color: var(--border-inverted-color);
                         border-radius: var(--border-radius);
                         pointer-events: none;
+                        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                     }
                 </style>`;
     },

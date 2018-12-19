@@ -1,149 +1,199 @@
 import Color from "./color.js";
 
 export default {
-    get MOUSE_INPUT() { return 'mouseinput'; },
-    get TEXT_INPUT() { return 'textinput'; },
-    get ATTRIBUTE_INPUT() { return 'attributeinput'; },
-
-    init(dom) {
+    init() {
         return {
-            rawvalues: {
-                satbright: {
-                    x: dom.satbright.x,
-                    y: dom.satbright.y
-                },
-
-                transparency: dom.transparency.value,
-                hue: dom.hue.value
-            },
             color: {}
         }
     },
 
     update(o) {
-        if (!o.model) {
-            o.model = this.init(o.dom);
+        if (!o.model) { o.model = this.init(); }
+        if (this.shouldIgnoreChange(o)) { return o.model; }
+
+        switch (o.element) {
+            case o.component:
+                this.handleComponentAttributes(o);
+                break;
+
+            case o.dom.hue:
+            case o.dom.satbright:
+            case o.dom.transparency:
+                this.handleMouseInput(o);
+                break;
+
+            case o.dom.textInputA:
+            case o.dom.textInputR:
+            case o.dom.textInputG:
+            case o.dom.textInputB:
+                this.handleRGBA(o);
+                break;
+
+            case o.dom.textInputHex:
+                this.handleHex(o);
+                break;
         }
 
-        if (o.changeType === this.MOUSE_INPUT) {
-            return this.handleMouseInput(o);
-        } else if (o.element === o.dom.textInputHex) {
-            return this.handleHex(o);
-        } else if (o.changeType === this.ATTRIBUTE_INPUT) {
-            return this.handleAttributes(o);
-        }  else {
-            return this.handleRGB(o);
-        }
+        return o.model;
     },
 
     handleMouseInput(o) {
         switch (o.element) {
             case o.dom.hue:
                 if (o.attribute === 'value') {
-                    o.model.rawvalues.hue = o.element[o.attribute];
+                    o.model.color.hue = o.element[o.attribute] / 100;
+
+                    // change slider backgrounds to reflect current colors
+                    o.dom.satbright.backgroundColor = Color.RGBtoHex(Color.HSVtoRGB(o.model.color.hue, 1, 1));
+                    o.dom.transparency.backgroundColor = Color.RGBtoHex(Color.HSVtoRGB(o.model.color.hue, 1, 1));
                 } else {
-                    return o.model;
+                    return; // unimportant attribute change
                 }
                 break;
 
             case o.dom.satbright:
                 if (o.attribute === 'x' || o.attribute === 'y') {
-                    o.model.rawvalues.satbright[o.attribute] = o.element[o.attribute];
+                    o.model.color.saturation = o.dom.satbright.x / 100;
+                    o.model.color.brightness = (100 - o.dom.satbright.y) / 100;
                 } else {
-                    return o.model;
+                    return; // unimportant attribute change
                 }
                 break;
 
             case o.dom.transparency:
                 if (o.attribute === 'value') {
-                    o.model.rawvalues.transparency = o.element[o.attribute];
+                    o.model.color.alpha = 100 - this.formatTextInput(o.element[o.attribute], 0, 100);
+                    o.dom.textInputA.value = this.formatTextInput(o.model.color.alpha, 0, 100);
+                    o.component.alpha = o.model.color.alpha;
+                    this.ignoreNextChange(o, o.component,'alpha');
+                    return; // no need to update anything else
                 } else {
-                    return o.model;
+                    return; // unimportant attribute change
                 }
                 break;
 
             default:
-                return o.model;
+                return;
         }
 
-        // calculate color values from input
-        const color = {
-            hue: o.model.rawvalues.hue / 100,
-            transparency: 100 - parseInt(o.model.rawvalues.transparency),
-            saturation: o.model.rawvalues.satbright.x / 100,
-            brightness: (100 - o.model.rawvalues.satbright.y) / 100
-        };
+        o.model.color.rgb = Color.HSVtoRGB(o.model.color.hue, o.model.color.saturation, o.model.color.brightness);
+        o.model.color.hex = Color.RGBtoHex(o.model.color.rgb);
 
-        color.rgb = Color.HSVtoRGB(color.hue, color.saturation, color.brightness);
-        color.hex = Color.RGBtoHex(color.rgb);
-
-        // change slider backgrounds to reflect current colors
-        o.dom.satbright.backgroundColor = Color.RGBtoHex(Color.HSVtoRGB(color.hue, 1, 1));
-        o.dom.transparency.backgroundColor = Color.RGBtoHex(Color.HSVtoRGB(color.hue, 1, 1));
+        o.component.hex = o.model.color.hex;
+        this.ignoreNextChange(o, o.component,'hex');
 
         // update text inputs to reflect changes from sliders and coord picker
-        o.dom.textInputHex.value = color.hex;
-        o.dom.textInputR.value = parseInt(color.rgb.r);
-        o.dom.textInputG.value = parseInt(color.rgb.g);
-        o.dom.textInputB.value = parseInt(color.rgb.b);
-        o.dom.textInputA.value = parseInt(color.transparency);
-
-        // update model with new color vals
-        o.model.color = color;
-
-        return o.model;
+        o.dom.textInputHex.value = o.model.color.hex;
+        o.dom.textInputR.value = this.formatTextInput(o.model.color.rgb.r, 0, 255);
+        o.dom.textInputG.value = this.formatTextInput(o.model.color.rgb.g, 0, 255);
+        o.dom.textInputB.value = this.formatTextInput(o.model.color.rgb.b, 0, 255);
     },
 
-    handleRGB(o) {
-        const color = {
-            rgb: {
-                r: o.dom.textInputR.value,
-                g: o.dom.textInputG.value,
-                b: o.dom.textInputB.value,
-            }
-        };
+    handleRGBA(o) {
+        if (o.element === o.dom.textInputA) {
+            o.model.color.alpha = this.formatTextInput(o.dom.textInputA.value,0, 100);
+            o.dom.transparency.value = o.model.color.alpha;
+            this.ignoreNextChange(o, o.dom.transparency, 'value');
+            o.component.alpha = o.model.color.alpha;
+            this.ignoreNextChange(o, o.component,'alpha');
+        } else {
+            o.model.color.rgb = {
+                r: this.formatTextInput(o.dom.textInputR.value, 0, 255),
+                g: this.formatTextInput(o.dom.textInputG.value, 0, 255),
+                b: this.formatTextInput(o.dom.textInputB.value, 0, 255)
+            };
+            o.model.color.hex = Color.RGBtoHex(o.model.color.rgb);
+            o.component.hex = o.model.color.hex;
+            o.dom.textInputHex.value = o.model.color.hex;
+            this.ignoreNextChange(o, o.component,'hex');
 
-        const hsv = Color.RGBtoHSV(color.rgb.r, color.rgb.g, color.rgb.b);
-        o.dom.hue.value = hsv.h * 100;
-        o.dom.satbright.x = hsv.s * 100;
-        o.dom.satbright.y = 100 - hsv.v * 100;
-
-        return o.model;
-
+            this.updateHSBFromRGB(o);
+        }
     },
 
-    handleAttributes(o) {
+    handleComponentAttributes(o) {
         if (o.attribute === 'alpha') {
-            o.model.rawvalues.transparency = o.element.alpha;
-            o.dom.transparency.value = 100 - o.element.alpha;
+            o.model.color.alpha = 100 - o.element.alpha;
+
+            o.dom.transparency.value = o.model.color.alpha;
+            this.ignoreNextChange(o, o.dom.transparency,'value');
             o.dom.textInputA.value = o.element.alpha;
-            return o.model;
         } else {
             o.model.color.hex = o.element.hex;
-            return this.updateFromHex(o);
+            o.dom.textInputHex.value = o.element.hex;
+            this.updateRGBFromHex(o);
         }
     },
 
     handleHex(o) {
         o.model.color.hex = o.dom.textInputHex.value;
-        return this.updateFromHex(o);
+        o.component.hex = o.model.color.hex;
+        this.ignoreNextChange(o, o.component,'hex');
+        this.updateRGBFromHex(o);
     },
 
-    updateFromHex(o) {
-        const color = {
-            rgb: Color.hexToRGB(o.model.color.hex)
-        };
+    formatTextInput(value, min, max) {
+        value = Math.min(value, max);
+        value = Math.max(value, min);
+        return parseInt(value);
+    },
 
-        o.dom.textInputR.value = parseInt(color.rgb.r);
-        o.dom.textInputG.value = parseInt(color.rgb.g);
-        o.dom.textInputB.value = parseInt(color.rgb.b);
+    updateRGBFromHex(o) {
+        o.model.color.rgb = Color.hexToRGB(o.model.color.hex);
+        o.dom.textInputR.value = parseInt(o.model.color.rgb.r);
+        o.dom.textInputG.value = parseInt(o.model.color.rgb.g);
+        o.dom.textInputB.value = parseInt(o.model.color.rgb.b);
 
-        const hsv = Color.RGBtoHSV(color.rgb.r, color.rgb.g, color.rgb.b);
+        this.updateHSBFromRGB(o);
+    },
 
-        o.dom.hue.value = hsv.h * 100;
-        o.dom.satbright.x = hsv.s * 100;
-        o.dom.satbright.y = 100 - hsv.v * 100;
+    updateHSBFromRGB(o) {
+        const hsv = Color.RGBtoHSV(o.model.color.rgb.r, o.model.color.rgb.g, o.model.color.rgb.b);
+        o.model.color.hue = hsv.h;
+        o.model.color.saturation = hsv.s;
+        o.model.color.brightness = 1 - hsv.v;
 
-        return o.model;
+        o.dom.hue.value = o.model.color.hue * 100;
+        this.ignoreNextChange(o, o.dom.hue,'value');
+
+        o.dom.satbright.x = o.model.color.saturation * 100;
+        o.dom.satbright.y = o.model.color.brightness * 100;
+        this.ignoreNextChange(o, o.dom.satbright,['x', 'y']);
+
+        // change slider backgrounds to reflect current colors
+        o.dom.satbright.backgroundColor = Color.RGBtoHex(Color.HSVtoRGB(hsv.h, 1, 1));
+        o.dom.transparency.backgroundColor = Color.RGBtoHex(Color.HSVtoRGB(hsv.h, 1, 1));
+    },
+
+    ignoreNextChange(o, el, attr) {
+        if (!Array.isArray(attr)) {
+            attr = [ attr ];
+        }
+
+        if (!o.model.ignoreNextChange) {
+            o.model.ignoreNextChange = new WeakMap();
+        }
+
+        for (let c = 0; c < attr.length; c++) {
+            if (o.model.ignoreNextChange.has(el)) {
+                o.model.ignoreNextChange.get(el).push(attr[c]);
+            } else {
+                o.model.ignoreNextChange.set(el, [ attr[c] ]);
+            }
+        }
+    },
+
+    shouldIgnoreChange(o) {
+        if (o.model.ignoreNextChange && o.model.ignoreNextChange.has(o.element)) {
+            const ignore = o.model.ignoreNextChange.get(o.element);
+            if (ignore.indexOf(o.attribute) !== -1) {
+                ignore.splice(ignore.indexOf(o.attribute), 1);
+                if (ignore.length === 0) {
+                    o.model.ignoreNextChange.delete(o.element);
+                }
+                return true;
+            }
+        }
+        return false;
     }
 }

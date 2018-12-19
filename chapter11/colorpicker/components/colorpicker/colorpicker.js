@@ -13,18 +13,15 @@ export default class ColorPicker extends HTMLElement {
         switch (name) {
             case 'hex':
             case 'alpha':
-                if (this._ignoreNextAttributeChange) {
-                    this._ignoreNextAttributeChange = false;
-                    return;
-                }
                 if (oldVal !== newValue) {
-                    Handlers.update({
+                    const update = Handlers.update({
                         model: this.data,
                         dom: this.dom,
+                        component: this,
                         element: this,
                         attribute: name,
-                        changeType: Handlers.ATTRIBUTE_INPUT
                     });
+                    this.data = update;
                 }
                 break;
         }
@@ -48,7 +45,6 @@ export default class ColorPicker extends HTMLElement {
 
     constructor() {
         super();
-        this._ignoreNextAttributeChange = false;
         this.attachShadow({mode: 'open'});
         this.shadowRoot.innerHTML = Template.render();
         this.dom = Template.mapDOM(this.shadowRoot);
@@ -62,30 +58,20 @@ export default class ColorPicker extends HTMLElement {
            this.data = Handlers.update({
                model: this.data,
                dom: this.dom,
+               component: this,
                element: rec.target,
                attribute: rec.attributeName,
-               changeType: Handlers.MOUSE_INPUT
            });
        });
-
-       this._ignoreNextAttributeChange = true;
-       this.hex = this.data.color.hex;
-       this._ignoreNextAttributeChange = true;
-       this.alpha = this.data.color.transparency;
     }
 
     onInputValueChanged(e) {
         this.data = Handlers.update( {
             model: this.data,
             dom: this.dom,
+            component: this,
             element: e.target,
-            changeType: Handlers.TEXT_INPUT
         });
-
-        this._ignoreNextAttributeChange = true;
-        this.hex = this.data.color.hex;
-        this._ignoreNextAttributeChange = true;
-        this.alpha = this.data.color.transparency;
     }
 }
 

@@ -62,7 +62,7 @@ export default class Slider extends HTMLElement {
     }
 
     refreshSlider(value) {
-         this.dom.thumb.style.left = value/100 * this.offsetWidth + 'px';
+         this.dom.thumb.style.left = (value/100 * this.offsetWidth - Template.THUMB_SIZE/2) + 'px';
     }
 
     updateX(x) {

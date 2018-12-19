@@ -23,6 +23,10 @@
 
     <h1>Transparency</h1>
     <script>
+        document.body.style.backgroundColor = document.querySelector('cp-color-picker').getAttribute('hex');
+        document.querySelector('h1').style.opacity = document.querySelector('cp-color-picker').getAttribute('alpha');
+
+
         const observer = new MutationObserver( function(records) {
             records.forEach( rec => {
                 switch (rec.attributeName) {

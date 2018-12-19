@@ -116,8 +116,8 @@ export default class CoordPicker extends HTMLElement {
     }
 
     refreshCoordinates() {
-        this.dom.thumb.style.left = this.x/100 * this.offsetWidth + 'px';
-        this.dom.thumb.style.top = this.y/100 * this.offsetHeight + 'px';
+        this.dom.thumb.style.left = (this.x/100 * this.offsetWidth - Template.THUMB_SIZE/2) + 'px';
+        this.dom.thumb.style.top = (this.y/100 * this.offsetHeight - Template.THUMB_SIZE/2) + 'px';
     }
 }
 
