@@ -5,6 +5,10 @@ import Handlers from './handlers.js';
  * design is heavily borrowed/stolen from https://cssgradient.io/
  */
 export default class ColorPicker extends HTMLElement {
+    static get DEFAULT_HEX() { return '#77aabb'; }
+
+    static get DEFAULT_ALPHA() { return 100; }
+
     static get observedAttributes() {
         return ['hex', 'alpha'];
     }
@@ -51,6 +55,15 @@ export default class ColorPicker extends HTMLElement {
         const observer = new MutationObserver( e => this.onMutationChange(e));
         observer.observe(this.shadowRoot, { attributes: true, subtree: true });
         this.shadowRoot.addEventListener('change', e => this.onInputValueChanged(e));
+    }
+
+    connectedCallback() {
+        if (!this.hex) {
+            this.hex = ColorPicker.DEFAULT_HEX;
+        }
+        if (!this.alpha) {
+            this.alpha = ColorPicker.DEFAULT_ALPHA;
+        }
     }
 
     onMutationChange(records) {
