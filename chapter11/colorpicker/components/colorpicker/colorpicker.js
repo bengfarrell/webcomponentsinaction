@@ -18,14 +18,13 @@ export default class ColorPicker extends HTMLElement {
             case 'hex':
             case 'alpha':
                 if (oldVal !== newValue) {
-                    const update = Handlers.update({
+                    this.data = Handlers.update({
                         model: this.data,
                         dom: this.dom,
                         component: this,
                         element: this,
                         attribute: name,
                     });
-                    this.data = update;
                 }
                 break;
         }

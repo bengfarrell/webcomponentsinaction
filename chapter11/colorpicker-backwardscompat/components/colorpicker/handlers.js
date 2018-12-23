@@ -45,8 +45,8 @@ export default {
                     o.model.color.hue = o.element[o.attribute] / 100;
 
                     // change slider backgrounds to reflect current colors
-                    o.dom.satbright.backgroundColor = Color.RGBtoHex(Color.HSVtoRGB(o.model.color.hue, 1, 1));
-                    o.dom.transparency.backgroundColor = Color.RGBtoHex(Color.HSVtoRGB(o.model.color.hue, 1, 1));
+                    o.dom.satbright.backgroundcolor = Color.RGBtoHex(Color.HSVtoRGB(o.model.color.hue, 1, 1));
+                    o.dom.transparency.backgroundcolor = Color.RGBtoHex(Color.HSVtoRGB(o.model.color.hue, 1, 1));
                 } else {
                     return; // unimportant attribute change
                 }
@@ -173,8 +173,8 @@ export default {
         o.dom.satbright.y = (1 - o.model.color.brightness) * 100;
 
         // change slider backgrounds to reflect current colors
-        o.dom.satbright.backgroundColor = Color.RGBtoHex(Color.HSVtoRGB(hsv.h, 1, 1));
-        o.dom.transparency.backgroundColor = Color.RGBtoHex(Color.HSVtoRGB(hsv.h, 1, 1));
+        o.dom.satbright.backgroundcolor = Color.RGBtoHex(Color.HSVtoRGB(hsv.h, 1, 1));
+        o.dom.transparency.backgroundcolor = Color.RGBtoHex(Color.HSVtoRGB(hsv.h, 1, 1));
     },
 
     ignoreNextChange(o, el, attr) {

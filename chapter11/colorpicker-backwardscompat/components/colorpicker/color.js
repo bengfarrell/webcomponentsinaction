@@ -119,6 +119,8 @@ export default {
         return val;
     },
 
+
+
     toHex(val) {
         let hex = Number(val).toString(16);
         if (hex.length < 2) {

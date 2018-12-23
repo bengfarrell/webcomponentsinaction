@@ -2,11 +2,14 @@ import Template from './template.js';
 import Color from '../colorpicker/color.js';
 
 export default class Slider extends HTMLElement {
+    static get USE_SHADOWDOM_WHEN_AVAILABLE() { return false; }
+
     static get observedAttributes() {
         return ['value', 'backgroundcolor'];
     }
 
     attributeChangedCallback(name, oldVal, newValue) {
+        if (!this.dom) { return; }
         switch (name) {
             case 'value':
                 this.refreshSlider(newValue);
@@ -26,12 +29,12 @@ export default class Slider extends HTMLElement {
         return this.getAttribute('value');
     }
 
-    set backgroundColor(val) {
-        this.setAttribute('backgroundColor', val);
+    set backgroundcolor(val) {
+        this.setAttribute('backgroundcolor', val);
     }
 
-    get backgroundColor() {
-        return this.getAttribute('backgroundColor');
+    get backgroundcolor() {
+        return this.getAttribute('backgroundcolor');
     }
 
     set isDragging(val) {
@@ -48,9 +51,12 @@ export default class Slider extends HTMLElement {
 
     constructor() {
         super();
-        this.attachShadow({mode: 'open'});
-        this.shadowRoot.innerHTML = Template.render();
-        this.dom = Template.mapDOM(this.shadowRoot);
+
+        if (Slider.USE_SHADOWDOM_WHEN_AVAILABLE && this.attachShadow) {
+            this.root = this.attachShadow({mode: 'open'});
+        } else {
+            this.root = this;
+        }
 
         document.addEventListener('mousemove', e => this.eventHandler(e));
         document.addEventListener('mouseup', e => this.eventHandler(e));
@@ -58,10 +64,27 @@ export default class Slider extends HTMLElement {
         this.addEventListener('mouseup', e => this.eventHandler(e));
     }
 
+    connectedCallback() {
+        if (!this.initialized) {
+            this.root.innerHTML = Template.render({ useShadowDOM: Slider.USE_SHADOWDOM_WHEN_AVAILABLE && this.attachShadow });
+            this.dom = Template.mapDOM(this.root);
+            this.initialized = true;
+
+            if (this.backgroundColor) {
+                this.setColor(this.backgroundColor);
+            }
+
+            if (this.value) {
+                this.refreshSlider(this.value);
+            }
+        }
+    }
+
     setColor(color) {
         const rgb = Color.hexToRGB(color);
         this.dom.overlay.style.background = `linear-gradient(to right, rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 1) 0%, rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0) 100%)`;
     }
+
 
     refreshSlider(value) {
          this.dom.thumb.style.left = (value/100 * this.offsetWidth - Template.THUMB_SIZE/2) + 'px';
