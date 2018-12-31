@@ -6,13 +6,13 @@ export default {
 
     mapDOM(scope) {
         return {
-            overlay: scope.getElementById('bg-overlay'),
-            thumb: scope.getElementById('thumb'),
+            thumb: scope.getElementById('thumb')
         }
     },
 
     html() {
-        return `<div id="bg-overlay"></div>
+        return `<div id="bg-overlay-a"></div>
+                <div id="bg-overlay-b"></div>
                 <div id="thumb"></div>`;
     },
 
@@ -21,25 +21,32 @@ export default {
                     :host {
                         display: inline-block;
                         position: relative;
-                        border-radius: var(--border-radius);
                     }
                     
-                    #bg-overlay {
+                    #bg-overlay-a {
                         width: 100%;
                         height: 100%;
+                        border-radius: 3px;
                         position: absolute;
-                        border-radius: var(--border-radius);
+                        background: linear-gradient(to right, #fff 0%, rgba(255,255,255,0) 100%);
+                    }
+                    
+                    #bg-overlay-b {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 3px;
+                        position: absolute;
+                        background: linear-gradient(to bottom, transparent 0%, #000 100%);
                     }
                     
                     #thumb {
-                        margin-top: -1px;
                         width: 5px;
-                        height: calc(100% - 5px);
+                        height: 5px;
                         position: absolute;
                         border-style: solid;
-                        border-width: var(--border-width-thick);
-                        border-color: var(--border-inverted-color);
-                        border-radius: var(--border-radius);
+                        border-width: 3px;
+                        border-color: white;
+                        border-radius: 6px;
                         pointer-events: none;
                         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                     }

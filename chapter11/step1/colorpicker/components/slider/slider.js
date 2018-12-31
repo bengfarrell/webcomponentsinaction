@@ -1,5 +1,4 @@
 import Template from './template.js';
-import Color from '../colorpicker/color.js';
 
 export default class Slider extends HTMLElement {
     static get observedAttributes() {
@@ -45,9 +44,9 @@ export default class Slider extends HTMLElement {
         this.addEventListener('mousedown', e => this.eventHandler(e));
     }
 
+
     setColor(color) {
-        const rgb = Color.hexToRGB(color);
-        this.dom.overlay.style.background = `linear-gradient(to right, rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 1) 0%, rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0) 100%)`;
+        this.dom.overlay.style.background = `linear-gradient(to right, ${color} 0%, ${color}00 100%)`;
     }
 
     refreshSlider(value) {

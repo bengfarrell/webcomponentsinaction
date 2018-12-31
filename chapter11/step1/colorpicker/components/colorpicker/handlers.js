@@ -45,8 +45,8 @@ export default {
                     o.model.color.hue = o.element[o.attribute] / 100;
 
                     // change slider backgrounds to reflect current colors
-                    o.dom.satbright.backgroundcolor = Color.RGBtoHex(Color.HSVtoRGB(o.model.color.hue, 1, 1));
-                    o.dom.transparency.backgroundcolor = Color.RGBtoHex(Color.HSVtoRGB(o.model.color.hue, 1, 1));
+                    o.dom.satbright.backgroundColor = Color.RGBtoHex(Color.HSVtoRGB(o.model.color.hue, 1, 1));
+                    o.dom.transparency.backgroundColor = Color.RGBtoHex(Color.HSVtoRGB(o.model.color.hue, 1, 1));
                 } else {
                     return; // unimportant attribute change
                 }
@@ -173,10 +173,17 @@ export default {
         o.dom.satbright.y = (1 - o.model.color.brightness) * 100;
 
         // change slider backgrounds to reflect current colors
-        o.dom.satbright.backgroundcolor = Color.RGBtoHex(Color.HSVtoRGB(hsv.h, 1, 1));
-        o.dom.transparency.backgroundcolor = Color.RGBtoHex(Color.HSVtoRGB(hsv.h, 1, 1));
+        o.dom.satbright.backgroundColor = Color.RGBtoHex(Color.HSVtoRGB(hsv.h, 1, 1));
+        o.dom.transparency.backgroundColor = Color.RGBtoHex(Color.HSVtoRGB(hsv.h, 1, 1));
     },
 
+    /* You've got an attribute change from one component incoming.
+       You make the appropriate UI changes including changing another component's attributes.
+       The problem is that by changing THAT component, it will trigger another attribute change event.
+       This could go on and on in an infinite loop.
+       When making changes to those components, we record that we should ignore the incoming change that occurred.
+       And now, no infinite loops!
+     */
     ignoreNextChange(o, el, attr) {
         if (!Array.isArray(attr)) {
             attr = [ attr ];
@@ -195,13 +202,6 @@ export default {
         }
     },
 
-    /* You've got an attribute change from one component incoming.
-   You make the appropriate UI changes including changing another component's attributes.
-   The problem is that by changing THAT component, it will trigger another attribute change event.
-   This could go on and on in an infinite loop.
-   When making changes to those components, we record that we should ignore the incoming change that occurred.
-   And now, no infinite loops!
-   */
     shouldIgnoreChange(o) {
         if (o.model.ignoreNextChange && o.model.ignoreNextChange.has(o.element)) {
             const ignore = o.model.ignoreNextChange.get(o.element);

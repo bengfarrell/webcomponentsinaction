@@ -45,18 +45,6 @@ export default class CoordPicker extends HTMLElement {
         return this.getAttribute('backgroundcolor');
     }
 
-    set isDragging(val) {
-        if (val) {
-            this.setAttribute('isDragging', val);
-        } else {
-            this.removeAttribute('isDragging');
-        }
-    }
-
-    get isDragging() {
-        return this.getAttribute('isDragging');
-    }
-
     constructor() {
         super();
 
@@ -69,7 +57,6 @@ export default class CoordPicker extends HTMLElement {
         document.addEventListener('mousemove', e => this.eventHandler(e));
         document.addEventListener('mouseup', e => this.eventHandler(e));
         this.addEventListener('mousedown', e => this.eventHandler(e));
-        this.addEventListener('mouseup', e => this.eventHandler(e));
     }
 
     connectedCallback() {
@@ -131,14 +118,11 @@ export default class CoordPicker extends HTMLElement {
         }
         this.x = (hPos / this.offsetWidth) * 100;
         this.y = (vPos / this.offsetHeight) * 100;
-
-        const ce = new CustomEvent('change', { detail: { target: this, x: this.x, y: this.y }});
-        this.dispatchEvent(ce);
     }
 
     refreshCoordinates() {
-        this.dom.thumb.style.left = (this.x/100 * this.offsetWidth - Template.THUMB_SIZE/2) + 'px';
-        this.dom.thumb.style.top = (this.y/100 * this.offsetHeight - Template.THUMB_SIZE/2) + 'px';
+        this.dom.thumb.style.left = (this.x/100 * this.offsetWidth - this.dom.thumb.offsetWidth/2) + 'px';
+        this.dom.thumb.style.top = (this.y/100 * this.offsetHeight - this.dom.thumb.offsetWidth/2) + 'px';
     }
 }
 

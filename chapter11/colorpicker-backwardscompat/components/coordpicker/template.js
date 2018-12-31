@@ -1,7 +1,4 @@
 export default {
-    get _THUMB_SIZE() { return 5; },
-    get THUMB_SIZE() { return this._THUMB_SIZE + 3 + 3 }, // include border thickness
-
     render(opts) {
         return `${this.css(opts.useShadowDOM)}
                 ${this.html()}`;
@@ -52,8 +49,8 @@ export default {
                     }
                     
                     ${this.createHostSelector(useShadowDOM, comp)} .thumb {
-                        width: ${this._THUMB_SIZE}px;
-                        height: ${this._THUMB_SIZE}px;
+                        width: 5px;
+                        height: 5px;
                         position: absolute;
                         border-style: solid;
                         border-width: var(--border-width-thick);

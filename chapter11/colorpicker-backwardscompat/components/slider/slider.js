@@ -37,16 +37,16 @@ export default class Slider extends HTMLElement {
         return this.getAttribute('backgroundcolor');
     }
 
-    set isDragging(val) {
+    set isdragging(val) {
         if (val) {
-            this.setAttribute('isDragging', val);
+            this.setAttribute('isdragging', val);
         } else {
-            this.removeAttribute('isDragging');
+            this.removeAttribute('isdragging');
         }
     }
 
-    get isDragging() {
-        return this.getAttribute('isDragging');
+    get isdragging() {
+        return this.getAttribute('isdragging');
     }
 
     constructor() {
@@ -61,7 +61,6 @@ export default class Slider extends HTMLElement {
         document.addEventListener('mousemove', e => this.eventHandler(e));
         document.addEventListener('mouseup', e => this.eventHandler(e));
         this.addEventListener('mousedown', e => this.eventHandler(e));
-        this.addEventListener('mouseup', e => this.eventHandler(e));
     }
 
     connectedCallback() {
@@ -70,8 +69,8 @@ export default class Slider extends HTMLElement {
             this.dom = Template.mapDOM(this.root);
             this.initialized = true;
 
-            if (this.backgroundColor) {
-                this.setColor(this.backgroundColor);
+            if (this.backgroundcolor) {
+                this.setColor(this.backgroundcolor);
             }
 
             if (this.value) {
@@ -87,7 +86,7 @@ export default class Slider extends HTMLElement {
 
 
     refreshSlider(value) {
-         this.dom.thumb.style.left = (value/100 * this.offsetWidth - Template.THUMB_SIZE/2) + 'px';
+         this.dom.thumb.style.left = (value/100 * this.offsetWidth - this.dom.thumb.offsetWidth/2) + 'px';
     }
 
     updateX(x) {
@@ -99,9 +98,6 @@ export default class Slider extends HTMLElement {
             hPos = 0;
         }
         this.value = (hPos / this.offsetWidth) * 100;
-
-        const ce = new CustomEvent('change', { detail: { target: this, value: this.value }});
-        this.dispatchEvent(ce);
     }
 
     eventHandler(e) {
@@ -110,17 +106,17 @@ export default class Slider extends HTMLElement {
 
         switch (e.type) {
             case 'mousedown':
-                this.isDragging = true;
+                this.isdragging = true;
                 this.updateX(x);
                 this.refreshSlider(this.value);
                 break;
 
             case 'mouseup':
-                this.isDragging = false;
+                this.isdragging = false;
                 break;
 
             case 'mousemove':
-                if (this.isDragging) {
+                if (this.isdragging) {
                     this.updateX(x);
                     this.refreshSlider(this.value);
                 }

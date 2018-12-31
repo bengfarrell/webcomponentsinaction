@@ -1,6 +1,5 @@
 import Slider from '../slider/slider.js';
 import CoordinatePicker from '../coordpicker/coordpicker.js';
-import Color from './color.js';
 
 import InputFields from '../../designsystem/inputfields.js';
 import Base from '../../designsystem/base.js';

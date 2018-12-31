@@ -1,10 +1,6 @@
 export default {
-    get _THUMB_SIZE() { return 5; },
-    get THUMB_SIZE() { return this._THUMB_SIZE + 3 + 3 }, // include border thickness
-
     render(opts) {
-        return `${this.designSystem()}
-                ${this.css(opts.useShadowDOM)}
+        return `${this.css(opts.useShadowDOM)}
                 ${this.html()}`;
     },
 
@@ -46,7 +42,7 @@ export default {
                     
                     ${this.createHostSelector(useShadowDOM, comp)} .thumb {
                         margin-top: -1px;
-                        width: ${this._THUMB_SIZE}px;
+                        width: 5px;
                         height: calc(100% - 5px);
                         position: absolute;
                         border-style: solid;
@@ -57,9 +53,5 @@ export default {
                         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                     }
                 </style>`;
-    },
-
-    designSystem() {
-        return ``;
     }
 }

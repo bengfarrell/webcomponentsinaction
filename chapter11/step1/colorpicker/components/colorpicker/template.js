@@ -1,10 +1,6 @@
 import Slider from '../slider/slider.js';
 import CoordinatePicker from '../coordpicker/coordpicker.js';
 
-import InputFields from '../../designsystem/inputfields.js';
-import Base from '../../designsystem/base.js';
-import Modal from '../../designsystem/modal.js';
-
 export default {
     render() {
         return `${this.css()}
@@ -37,28 +33,28 @@ export default {
    
                     <div class="row">
                         <div class="text-inputs">
-                            <div class="ds-form-input">
-                              <label class="ds-input-field-label top" for="textInputR">Red</label>
+                            <div>
+                              <label class="top" for="textInputR">Red</label>
                               <input id="textInputR" type="number" value="0" max="255" size="4" min="0">
                             </div>
                             
-                            <div class="ds-form-input">
-                              <label class="ds-input-field-label top" for="textInputG">Green</label>
+                            <div>
+                              <label class="top" for="textInputG">Green</label>
                               <input id="textInputG" type="number" value="0" max="255" size="4" min="0">
                             </div>
                             
-                            <div class="ds-form-input">
-                              <label class="ds-input-field-label top" for="textInputB">Blue</label>
+                            <div>
+                              <label class="top" for="textInputB">Blue</label>
                               <input id="textInputB" type="number" value="0" max="255" size="4" min="0">
                             </div>
                             
-                            <div class="ds-form-input">
-                              <label class="ds-input-field-label top" for="textInputA">Alpha</label>
+                            <div>
+                              <label class="top" for="textInputA">Alpha</label>
                               <input id="textInputA" type="number" value="0" max="100" min="0" size="4">
                             </div>
                             
-                            <div class="ds-form-input">
-                              <label class="ds-input-field-label top" for="textInputHex">Hex</label>
+                            <div>
+                              <label class="top" for="textInputHex">Hex</label>
                               <input id="textInputHex" type="text" width="50px" size="8">
                             </div>
                         </div>
@@ -68,18 +64,11 @@ export default {
 
     css() {
         return `<style>
-                    ${Base.css()}
-                    ${InputFields.css()}
-                    
                     :host {
                         width: 100%;
                         display: inline-block;
                     }
-                    
-                    :host(.modal) {
-                        ${Modal.rules()}
-                    }
-                    
+ 
                     .container {
                         padding: 10px;
                     }
@@ -103,13 +92,13 @@ export default {
                         width: 100%;
                         height: 40px;
                         margin-bottom: 5px;
-                        border-radius: var(--border-radius);
+                        border-radius: 3px;
                     }
                     
                     #saturation-brightness {
                         width: 90px;
                         height: 90px;
-                        border-radius: var(--border-radius);
+                        border-radius: 3px;
                     }
                     
                     #hue-slider {
