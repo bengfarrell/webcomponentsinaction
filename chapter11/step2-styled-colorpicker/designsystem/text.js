@@ -4,13 +4,8 @@ export default {
             font-family: sans-serif;
             font-size: 1em;
             line-height: 1.2em;
-            color: black;
-        `;
+            color: var(--color-black);`;
     },
 
-    inverted() {
-        return `
-            color: white;
-        `;
-    }
+    inverted() { return `color: var(--color-white);`; }
 }

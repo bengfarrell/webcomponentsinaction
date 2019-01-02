@@ -68,10 +68,10 @@ export default {
 
     css() {
         return `<style>
-                    ${Base.css()}
                     ${InputFields.css()}
                     
                     :host {
+                        ${Base.common()};
                         width: 100%;
                         display: inline-block;
                     }

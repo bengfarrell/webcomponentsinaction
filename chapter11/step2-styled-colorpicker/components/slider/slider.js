@@ -71,17 +71,17 @@ export default class Slider extends HTMLElement {
 
         switch (e.type) {
             case 'mousedown':
-                this.isDragging = true;
+                this.isdragging = true;
                 this.updateX(x);
                 this.refreshSlider(this.value);
                 break;
 
             case 'mouseup':
-                this.isDragging = false;
+                this.isdragging = false;
                 break;
 
             case 'mousemove':
-                if (this.isDragging) {
+                if (this.isdragging) {
                     this.updateX(x);
                     this.refreshSlider(this.value);
                 }

@@ -37,18 +37,6 @@ export default class Slider extends HTMLElement {
         return this.getAttribute('backgroundcolor');
     }
 
-    set isdragging(val) {
-        if (val) {
-            this.setAttribute('isdragging', val);
-        } else {
-            this.removeAttribute('isdragging');
-        }
-    }
-
-    get isdragging() {
-        return this.getAttribute('isdragging');
-    }
-
     constructor() {
         super();
 
@@ -83,7 +71,6 @@ export default class Slider extends HTMLElement {
         const rgb = Color.hexToRGB(color);
         this.dom.overlay.style.background = `linear-gradient(to right, rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 1) 0%, rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0) 100%)`;
     }
-
 
     refreshSlider(value) {
          this.dom.thumb.style.left = (value/100 * this.offsetWidth - this.dom.thumb.offsetWidth/2) + 'px';

@@ -85,11 +85,11 @@ export default {
     css(useShadowDOM) {
         const comp = 'cp-color-picker';
         return `<style>
-                    ${Base.css()}
                     ${InputFields.css()}
                     
                     ${this.createHostSelector(useShadowDOM, comp)}
                     {
+                        ${Base.common()};
                         width: 100%;
                         display: inline-block;
                     }
