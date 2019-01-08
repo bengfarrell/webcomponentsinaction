@@ -101,7 +101,7 @@ module.exports = function(config) {
     // Add TDD testing
     client: {
         mocha: {
-            ui: 'tdd'launcher
+            ui: 'tdd'
         }
     }
   })
