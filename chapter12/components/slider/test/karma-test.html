@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="module" src="../src/slider.js"></script>
+</head>
+<body>
+<script>
+    suite('slider value getting/setting', function() {
+        const sliderWidth = 500;
+        const thumbCenterOffset = 5/2 + 3; // width/2 + left border
+        const container = document.createElement('div');
+        container.innerHTML = `<cp-slider style="width: ${sliderWidth}px" value="50"></cp-slider>`;
+        document.body.appendChild(container);
+        const slider = container.querySelector('cp-slider');
+
+        test('slider get initial value', function () {
+            assert.equal(slider.value, 50);
+            assert.equal(slider.getAttribute('value'), 50);
+            assert.equal(slider.root.querySelector('.thumb').style.left, sliderWidth * 50/100 - thumbCenterOffset + 'px');
+        });
+
+        test('set slider value with JS', function () {
+            slider.value = 20;
+            assert.equal(slider.value, 20);
+            assert.equal(slider.getAttribute('value'), 20);
+            assert.equal(slider.root.querySelector('.thumb').style.left, sliderWidth * 20/100 - thumbCenterOffset + 'px');
+        });
+
+        test('set slider value with attributes', function () {
+            slider.setAttribute('value', 30);
+            assert.equal(slider.value, 30);
+            assert.equal(slider.getAttribute('value'), 30);
+            assert.equal(slider.root.querySelector('.thumb').style.left, sliderWidth * 30/100 - thumbCenterOffset + 'px');
+        });
+
+        /*test('set slider value too big', function () {
+            slider.setAttribute('value', 110);
+            assert.equal(slider.value, 100);
+            assert.equal(slider.getAttribute('value'), 100);
+            assert.equal(slider.root.querySelector('.thumb').style.left, sliderWidth * 100/100 - thumbCenterOffset + 'px');
+        });
+
+        test('set slider value too small', function () {
+            slider.setAttribute('value', -10);
+            assert.equal(slider.value, 0);
+            assert.equal(slider.getAttribute('value'), 0);
+            assert.equal(slider.root.querySelector('.thumb').style.left, sliderWidth * 0/100 - thumbCenterOffset + 'px');
+        });*/
+    });
+
+
+    suite('slider background color getting/setting', function() {
+        const container = document.createElement('div');
+        container.innerHTML = `<cp-slider backgroundcolor="#ff0000"></cp-slider>`;
+        document.body.appendChild(container);
+        const slider = container.querySelector('cp-slider');
+
+        test('slider get initial background color', function () {
+            assert.equal(slider.backgroundcolor, '#ff0000');
+            assert.equal(slider.getAttribute('backgroundcolor'), '#ff0000');
+            assert.equal(slider.root.querySelector('.bg-overlay').style.background, 'linear-gradient(to right, rgb(255, 0, 0) 0%, rgba(255, 0, 0, 0) 100%)');
+        });
+
+        test('slider set background color with JS', function () {
+            slider.backgroundcolor = '#00ff00';
+            assert.equal(slider.backgroundcolor, '#00ff00');
+            assert.equal(slider.getAttribute('backgroundcolor'), '#00ff00');
+            assert.equal(slider.root.querySelector('.bg-overlay').style.background, 'linear-gradient(to right, rgb(0, 255, 0) 0%, rgba(0, 255, 0, 0) 100%)');
+        });
+
+        test('slider set background color with attribute', function () {
+            slider.backgroundcolor = '#0000ff';
+            assert.equal(slider.backgroundcolor, '#0000ff');
+            assert.equal(slider.getAttribute('backgroundcolor'), '#0000ff');
+            assert.equal(slider.root.querySelector('.bg-overlay').style.background, 'linear-gradient(to right, rgb(0, 0, 255) 0%, rgba(0, 0, 255, 0) 100%)');
+        });
+
+        /*test('slider set background color to bad value', function () {
+            slider.backgroundcolor = '#0ghns0ff';
+            assert.equal(slider.backgroundcolor, '#ffffff');
+            assert.equal(slider.getAttribute('backgroundcolor'), '#ffffff');
+            assert.equal(slider.root.querySelector('.bg-overlay').style.background, 'linear-gradient(to right, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%)');
+        });*/
+    });
+</script>
+</body>
+</html>
