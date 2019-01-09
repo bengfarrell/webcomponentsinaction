@@ -19,10 +19,12 @@
     "karma-safari-launcher": "^1.0.0",
     "mocha": "^5.2.0",
     "rollup": "^1.0.2",
-    "rollup-plugin-babel": "^4.2.0"
+    "rollup-plugin-babel": "^4.2.0",
+    "web-component-tester": "^6.9.2"
   },
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start karma.conf.js",
+    "karmatest": "./node_modules/karma/bin/karma start karma.conf.js",
+    "wcttest": "./node_modules/.bin/wct --npm chapter12/components/**/test/wct-test.html",
     "build-slider": "./node_modules/.bin/rollup chapter12/components/slider/src/slider.js --file chapter12/components/slider/slider.js --format umd --name slider -m",
     "build-coordpicker": "./node_modules/.bin/rollup chapter12/components/coordpicker/src/coordpicker.js --file chapter12/components/coordpicker/coordpicker.js --format umd --name coordpicker -m",
     "build-colorpicker": "./node_modules/.bin/rollup chapter12/components/colorpicker/src/colorpicker.js --file chapter12/components/colorpicker/colorpicker.js --format umd --name colorpicker -m",

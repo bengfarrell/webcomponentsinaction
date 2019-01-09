@@ -17,7 +17,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      './chapter12/components/**/test/karma-test.html',
+      './chapter12/components/**/test/karma-test.js',
       './chapter12/components/**/*.js'
     ],
 
@@ -76,23 +76,11 @@ module.exports = function(config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
 
-
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Firefox'],
-    //browsers: ['Chrome', 'Firefox', 'Safari'],
-
-    //browsers: ['ChromeHeadless'],
-    customLaunchers: {
-      FirefoxHeadless: {
-          base: 'Firefox',
-          flags: [ '-headless' ]
-      }
-    },
+    browsers: ['FirefoxHeadless', 'ChromeHeadless'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false, // Change to true
+    singleRun: true, // Change to true
 
     // Concurrency level
     // how many browser should be started simultaneous
