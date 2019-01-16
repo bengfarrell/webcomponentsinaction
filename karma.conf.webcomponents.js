@@ -12,13 +12,18 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'chai'], // Added Chai
+    frameworks: ['mocha', 'chai', 'web-components'], // Added Chai and web-components
 
 
     // list of files / patterns to load in the browser
     files: [
-      './chapter12/components/**/test/karma-test.js',
-      './chapter12/components/**/*.js'
+      './chapter12/components/**/src/*.js',
+      './node_modules/karma-web-components/framework.js',
+        {
+            pattern: './chapter12/components/**/test/karma-wc-test.html',
+            watched: true,
+            included: false // <--- THIS PART IS IMPORTANT!!!
+        }
     ],
 
 
@@ -35,6 +40,7 @@ module.exports = function(config) {
     rollupPreprocessor: {
       options: {
           output: {
+              // To include inlined sourcemaps as data URIs
               sourcemap: true,
               format: 'iife',
               name: 'testing'
