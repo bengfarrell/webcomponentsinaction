@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <script src="../../../../node_modules/web-component-tester/browser.js"></script>
     <script type="module" src="../src/slider.js"></script>
+    <script src="../../../../node_modules/karma-web-components/framework.js"></script>
 
     <style>
         cp-slider {
@@ -21,7 +21,7 @@
 
         const slider = document.body.querySelector('cp-slider');
 
-        test('slider get initial value', function () {
+            test('slider get initial value', function () {
             assert.equal(slider.value, 50);
             assert.equal(slider.getAttribute('value'), 50);
             assert.equal(slider.root.querySelector('.thumb').style.left, sliderWidth * 50/100 - thumbCenterOffset + 'px');
@@ -41,7 +41,7 @@
             assert.equal(slider.root.querySelector('.thumb').style.left, sliderWidth * 30/100 - thumbCenterOffset + 'px');
         });
 
-        test('set slider value too big', function () {
+        /*test('set slider value too big', function () {
             slider.setAttribute('value', 110);
             assert.equal(slider.value, 100);
             assert.equal(slider.getAttribute('value'), 100);
@@ -53,7 +53,7 @@
             assert.equal(slider.value, 0);
             assert.equal(slider.getAttribute('value'), 0);
             assert.equal(slider.root.querySelector('.thumb').style.left, sliderWidth * 0/100 - thumbCenterOffset + 'px');
-        });
+        });*/
 });
 
 </script>
