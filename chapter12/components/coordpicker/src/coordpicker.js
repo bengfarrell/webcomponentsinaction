@@ -1,7 +1,7 @@
 import Template from './template.js';
 
 export default class CoordPicker extends HTMLElement {
-    static get USE_SHADOWDOM_WHEN_AVAILABLE() { return false; }
+    static get USE_SHADOWDOM_WHEN_AVAILABLE() { return true; }
 
     static get observedAttributes() {
         return ['x', 'y', 'backgroundcolor'];

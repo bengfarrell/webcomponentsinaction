@@ -2,7 +2,7 @@ import Template from './template.js';
 import Color from '../../colorpicker/src/color.js';
 
 export default class Slider extends HTMLElement {
-    static get USE_SHADOWDOM_WHEN_AVAILABLE() { return false; }
+    static get USE_SHADOWDOM_WHEN_AVAILABLE() { return true; }
 
     static get observedAttributes() {
         return ['value', 'backgroundcolor'];

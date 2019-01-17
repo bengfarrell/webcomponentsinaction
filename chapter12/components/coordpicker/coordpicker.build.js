@@ -106,7 +106,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     }], [{
       key: "USE_SHADOWDOM_WHEN_AVAILABLE",
       get: function get() {
-        return false;
+        return true;
       }
     }, {
       key: "observedAttributes",

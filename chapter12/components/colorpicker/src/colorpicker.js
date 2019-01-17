@@ -5,7 +5,7 @@ import Handlers from './handlers.js';
  * design is heavily borrowed/stolen from https://cssgradient.io/
  */
 export default class ColorPicker extends HTMLElement {
-    static get USE_SHADOWDOM_WHEN_AVAILABLE() { return false; }
+    static get USE_SHADOWDOM_WHEN_AVAILABLE() { return true; }
 
     static get DEFAULT_HEX() { return '#77aabb'; }
     static get DEFAULT_ALPHA() { return 100; }
