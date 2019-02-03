@@ -1,13 +1,10 @@
 import Template from './template.js';
+import WorkoutPlanData from '../../data/workoutplan.js';
 
 export default class Exercise extends HTMLElement {
-    static get DELETE_EVENT() { return 'onDelete'; }
-    static get CHANGE_EVENT() { return 'onChange'; }
-
     constructor() {
         super();
         this.attachShadow({mode: 'open'});
-        //this.setAttribute('instance', Exercise.guid());
 
         const params = {
             label: this.getAttribute('label'),
@@ -21,35 +18,42 @@ export default class Exercise extends HTMLElement {
         this.shadowRoot.innerHTML = Template.render(params);
         this.dom = Template.mapDOM(this.shadowRoot);
 
-        this.dom.deleteBtn.addEventListener('click', e => this.onDelete(e));
-        this.shadowRoot.addEventListener('change', e => this.onInputFieldChange(e));
-    }
+        this.dom.deleteBtn.addEventListener('click', () => {
+            WorkoutPlanData.remove(this.id);
+        });
 
-    onDelete() {
-        const ce = new CustomEvent(Exercise.DELETE_EVENT, { bubbles: true, detail: { element: this } });
-        this.dispatchEvent(ce);
+        this.shadowRoot.addEventListener('change', e => this.onInputFieldChange(e));
     }
 
     onInputFieldChange(e) {
         switch (e.target) {
             case this.dom.countInput:
                 this.count = e.target.value;
+                WorkoutPlanData.edit(this.id, 'count', e.target.value);
                 break;
 
             case this.dom.setsInput:
                 this.sets = e.target.value;
+                WorkoutPlanData.edit(this.id, 'sets', e.target.value);
                 break;
 
             case this.dom.timeInput:
                 this.time = e.target.value;
+                WorkoutPlanData.edit(this.id, 'time', e.target.value);
                 break;
         }
-        const ce = new CustomEvent(Exercise.CHANGE_EVENT, { bubbles: true, detail: { element: this } });
-        this.dispatchEvent(ce);
     }
 
     get instance() {
         return this.getAttribute('instance');
+    }
+
+    get id() {
+        return this.getAttribute('id');
+    }
+
+    set id(val) {
+        this.setAttribute('id', val);
     }
 
     get label() {
@@ -117,6 +121,7 @@ export default class Exercise extends HTMLElement {
             count: this.count,
             estimatedTimePerCount: this.estimatedTimePerCount,
             sets: this.sets,
+            id: this.id
         }
     }
 
@@ -129,13 +134,6 @@ export default class Exercise extends HTMLElement {
         }
         return attr;
     }
-
-    /*static get guid() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-            return v.toString(16);
-        });
-    }*/
 }
 
 if (!customElements.get('wkout-exercise')) {

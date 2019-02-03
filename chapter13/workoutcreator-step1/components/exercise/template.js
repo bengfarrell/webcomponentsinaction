@@ -57,6 +57,10 @@ export default {
                         display: flex;
                         align-items: center;
                     }    
+                           
+                    :host(.plan.playing) #info  {
+                        background-color: orangered;
+                    }
                                  
                     :host(.library) {
                         width: 200px;

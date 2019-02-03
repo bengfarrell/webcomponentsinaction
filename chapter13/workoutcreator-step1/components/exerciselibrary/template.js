@@ -19,20 +19,33 @@ export default {
     css() {
         return `<style>                                
                     :host {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    
+                    #container {
+                        overflow-y: scroll;
+                        height: calc(100% - 30px);
+                    }
+                </style>`;
+    }
+    /*css() {
+        return `<style>
+                    :host {
                         display: inline-block;
                         font-family: var(--font);
                         color: var(--text-color);
                     }
-                    
+
                     #container {
                         overflow-y: scroll;
                         width: 100%;
                         height: calc(100% - 60px);
                     }
-                    
+
                     h1 {
                         font-size: var(--header-font-size);
                     }
                 </style>`;
-    }
+    }*/
 }

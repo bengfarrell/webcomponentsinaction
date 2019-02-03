@@ -14,4 +14,10 @@ body {
 wkout-creator-app {
     height: calc(100vh - 20px);
     padding: 10px;
+    position: absolute;
+}
+
+wkout-playback {
+    width: 100%;
+    height: 100%;
 }
