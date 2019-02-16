@@ -1,0 +1,30 @@
+<html>
+<head>
+    <title>Custom Elements When Defined</title>
+    <script>
+        class SampleComponent extends HTMLElement {
+            constructor() {
+                super();
+                this.attachShadow({mode: 'open'});
+                this.shadowRoot.innerHTML = 'my component';
+            }
+        }
+
+        setTimeout( function() {
+            if (!customElements.get('sample-component')) {
+                customElements.define('sample-component', SampleComponent);
+            }
+        }, 2000);
+
+        customElements.whenDefined('sample-component').then( ()=>{
+            console.log('defined now!');
+        });
+    </script>
+</head>
+<body>
+
+<sample-component></sample-component>
+
+</body>
+</html>
+

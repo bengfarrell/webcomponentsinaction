@@ -1,0 +1,26 @@
+<html>
+<head>
+    <title>Custom Events</title>
+    <script>
+        document.addEventListener('myevent', function(e) {
+           console.log('The message', e.detail.message, 'with number', e.detail.number);
+        });
+
+        const event = new CustomEvent('myevent', {
+            detail: {
+                message: 'hi',
+                number: 5
+            }
+        });
+
+        setTimeout( function() {
+            document.dispatchEvent(event);
+        }, 2000);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
+

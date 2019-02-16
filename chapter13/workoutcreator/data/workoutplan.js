@@ -31,7 +31,7 @@ export default {
                 exerciseIndex: -1,
                 time: 0,
             }});
-        EventBus.triggerEvent(ce);
+        EventBus.dispatchEvent(ce);
     },
 
     pause() {
@@ -74,7 +74,7 @@ export default {
                 exerciseIndex: this._currentWorkout.indexOf(this._currentExercise),
                 time: seconds,
             }});
-        EventBus.triggerEvent(ce);
+        EventBus.dispatchEvent(ce);
     },
 
     get saved() {
@@ -112,7 +112,7 @@ export default {
                 exercises: this._currentWorkout,
                 duration: this.totalDuration
             }});
-        EventBus.triggerEvent(ce);
+        EventBus.dispatchEvent(ce);
     },
 
     edit(id, key, value) {
@@ -130,7 +130,7 @@ export default {
                 exercise: exercise,
                 duration: this.totalDuration
             }});
-        EventBus.triggerEvent(ce);
+        EventBus.dispatchEvent(ce);
     },
 
     add(exercise) {
@@ -146,7 +146,7 @@ export default {
                 exercise: exercise,
                 duration: this.totalDuration
             }});
-        EventBus.triggerEvent(ce);
+        EventBus.dispatchEvent(ce);
     },
 
     getDurationOfExercise(exercise) {
@@ -168,7 +168,7 @@ export default {
                         exercise: deleted[0],
                         duration: this.totalDuration
                     }});
-                EventBus.triggerEvent(ce);
+                EventBus.dispatchEvent(ce);
                 return;
             }
         }
@@ -181,18 +181,13 @@ export default {
                 action: this.WORKOUT_PLAN_CLEAR_ACTION,
                 duration: this.totalDuration
             }});
-        EventBus.triggerEvent(ce);
+        EventBus.dispatchEvent(ce);
     },
 
     get totalDuration() {
         let ttlTime = 0;
         for (let c = 0; c < this._currentWorkout.length; c++) {
             ttlTime += this.getDurationOfExercise(this._currentWorkout[c]);
-            /*if (this._currentWorkout[c].time) {
-                ttlTime +=  this._currentWorkout[c].time * this._currentWorkout[c].sets;
-            } else {
-                ttlTime +=  this._currentWorkout[c].estimatedTimePerCount *  this._currentWorkout[c].count * this._currentWorkout[c].sets;
-            }*/
         }
         return ttlTime;
     },

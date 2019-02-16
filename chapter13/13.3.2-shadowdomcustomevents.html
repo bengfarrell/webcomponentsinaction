@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>Shadow DOM Custom Events</title>
+    <script>
+        class SampleComponent extends HTMLElement {
+            connectedCallback() {
+                const shadow = this.attachShadow({mode: 'open'}); // try 'closed' for even less info in the path
+                shadow.innerHTML = '<button>Click me</button>';
+                shadow.querySelector('button').addEventListener('click', e => {
+                    const customEvent = new CustomEvent('myclick', {
+                        bubbles: true,
+                        composed: true,
+                        detail: {
+                            message: 'hi',
+                            number: 5
+                        }
+                    });
+                    shadow.dispatchEvent(customEvent);
+                })
+            }
+        }
+
+        customElements.define('sample-component', SampleComponent);
+
+        document.addEventListener('myclick', function(e) {
+            console.log('was clicked', e.target, e.currentTarget, e.composedPath());
+        });
+    </script>
+</head>
+
+<body>
+<sample-component></sample-component>
+</body>
+</html>

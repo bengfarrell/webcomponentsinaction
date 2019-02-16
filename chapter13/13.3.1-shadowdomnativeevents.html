@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>Shadow DOM Native Events</title>
+    <script>
+        class SampleComponent extends HTMLElement {
+            connectedCallback() {
+                const shadow = this.attachShadow({mode: 'open'}); // try 'closed' for even less info in the path
+                shadow.innerHTML = '<button>Click me</button>';
+            }
+        }
+
+        customElements.define('sample-component', SampleComponent);
+
+        document.addEventListener('click', function(e) {
+            console.log('was clicked', e.target, e.currentTarget, e.composedPath());
+        });
+    </script>
+</head>
+
+<body>
+<sample-component></sample-component>
+</body>
+</html>

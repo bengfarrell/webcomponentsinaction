@@ -19,7 +19,7 @@ export default {
      * trigger event
      * @param custom event
      */
-    triggerEvent(ce) {
+    dispatchEvent(ce) {
         this._listeners.forEach( function(l) {
             if (ce.type === l.type) {
                 l.callback.apply(this, [ce]);

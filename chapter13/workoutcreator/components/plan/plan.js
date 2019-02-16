@@ -23,7 +23,7 @@ export default class Plan extends HTMLElement {
                 alert('Please add exercises to your workout');
                 return;
             }
-            EventBus.triggerEvent(new CustomEvent(Playback.ACTIVATE_PLAYBACK_EVENT));
+            EventBus.dispatchEvent(new CustomEvent(Playback.ACTIVATE_PLAYBACK_EVENT));
         });
 
         this.dom.menu.addEventListener('change', e => {

@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>Custom Event Bubbling</title>
+    <script>
+        document.addEventListener('myevent', function(e) {
+            console.log('The message', e.detail.message, 'with number', e.detail.number);
+        });
+
+        const event = new CustomEvent('myevent', {
+            bubbles: true,
+            detail: {
+                message: 'hi',
+                number: 5
+            }
+        });
+
+        setTimeout( function() {
+            document.getElementById('target').dispatchEvent(event);
+        }, 2000);
+
+    </script>
+</head>
+<body>
+    <div id="target"></div>
+</body>
+</html>
+

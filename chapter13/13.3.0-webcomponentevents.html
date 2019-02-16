@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>Web Component Events</title>
+    <script>
+        class SampleComponent extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = '<button>Click me</button>';
+            }
+        }
+
+        customElements.define('sample-component', SampleComponent);
+
+        document.addEventListener('click', function(e) {
+            console.log('was clicked', e.target, e.currentTarget, e.composedPath());
+        });
+    </script>
+</head>
+
+<body>
+<sample-component></sample-component>
+</body>
+</html>
