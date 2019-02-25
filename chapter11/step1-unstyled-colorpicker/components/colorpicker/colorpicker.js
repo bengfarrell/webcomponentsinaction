@@ -13,6 +13,7 @@ export default class ColorPicker extends HTMLElement {
     }
 
     attributeChangedCallback(name, oldVal, newValue) {
+        return;
         switch (name) {
             case 'hex':
             case 'alpha':
@@ -86,6 +87,6 @@ export default class ColorPicker extends HTMLElement {
     }
 }
 
-if (!customElements.get('cp-color-picker')) {
-    customElements.define('cp-color-picker', ColorPicker);
+if (!customElements.get('wcia-color-picker')) {
+    customElements.define('wcia-color-picker', ColorPicker);
 }

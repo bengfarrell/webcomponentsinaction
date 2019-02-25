@@ -24,14 +24,14 @@
   "scripts": {
     "karmatest": "./node_modules/karma/bin/karma start karma.conf.js",
     "karma-wc-test": "./node_modules/karma/bin/karma start karma.conf.webcomponents.js",
-    "wcttest": "./node_modules/.bin/wct --npm chapter12/components/**/test/wct-test.html",
-    "build-slider": "./node_modules/.bin/rollup chapter12/components/slider/src/slider.js --file chapter12/components/slider/slider.js --format umd --name slider -m",
-    "build-coordpicker": "./node_modules/.bin/rollup chapter12/components/coordpicker/src/coordpicker.js --file chapter12/components/coordpicker/coordpicker.js --format umd --name coordpicker -m",
-    "build-colorpicker": "./node_modules/.bin/rollup chapter12/components/colorpicker/src/colorpicker.js --file chapter12/components/colorpicker/colorpicker.js --format umd --name colorpicker -m",
+    "wcttest": "./node_modules/.bin/wct --npm chapter12and13/components/**/test/wct-test.html",
+    "build-slider": "./node_modules/.bin/rollup chapter12and13/components/slider/src/slider.js --file chapter12and13/components/slider/slider.js --format umd --name slider -m",
+    "build-coordpicker": "./node_modules/.bin/rollup chapter12and13/components/coordpicker/src/coordpicker.js --file chapter12and13/components/coordpicker/coordpicker.js --format umd --name coordpicker -m",
+    "build-colorpicker": "./node_modules/.bin/rollup chapter12and13/components/colorpicker/src/colorpicker.js --file chapter12and13/components/colorpicker/colorpicker.js --format umd --name colorpicker -m",
     "build-rollup": "npm run build-slider && npm run build-coordpicker && npm run build-colorpicker",
-    "build-slider-ie": "./node_modules/.bin/babel chapter12/components/slider/slider.js --out-file chapter12/components/slider/slider.build.js",
-    "build-coordpicker-ie": "./node_modules/.bin/babel chapter12/components/coordpicker/coordpicker.js --out-file chapter12/components/coordpicker/coordpicker.build.js",
-    "build-colorpicker-ie": "./node_modules/.bin/babel chapter12/components/colorpicker/colorpicker.js --out-file chapter12/components/colorpicker/colorpicker.build.js",
+    "build-slider-ie": "./node_modules/.bin/babel chapter12and13/components/slider/slider.js --out-file chapter12and13/components/slider/slider.build.js",
+    "build-coordpicker-ie": "./node_modules/.bin/babel chapter12and13/components/coordpicker/coordpicker.js --out-file chapter12and13/components/coordpicker/coordpicker.build.js",
+    "build-colorpicker-ie": "./node_modules/.bin/babel chapter12and13/components/colorpicker/colorpicker.js --out-file chapter12and13/components/colorpicker/colorpicker.build.js",
     "build-ie": "npm run build-slider-ie && npm run build-coordpicker-ie && npm run build-colorpicker-ie",
     "build": "npm run build-rollup && npm run build-ie"
   }

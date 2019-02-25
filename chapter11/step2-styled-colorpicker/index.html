@@ -19,12 +19,12 @@
     </style>
 </head>
 <body>
-    <cp-color-picker class="modal" hex="#7687db" alpha="75"></cp-color-picker>
+    <wcia-color-picker class="modal" hex="#7687db" alpha="75"></wcia-color-picker>
 
     <h1>Transparency</h1>
     <script>
-        document.body.style.backgroundColor = document.querySelector('cp-color-picker').getAttribute('hex');
-        document.querySelector('h1').style.opacity = document.querySelector('cp-color-picker').getAttribute('alpha');
+        document.body.style.backgroundColor = document.querySelector('wcia-color-picker').getAttribute('hex');
+        document.querySelector('h1').style.opacity = document.querySelector('wcia-color-picker').getAttribute('alpha');
 
 
         const observer = new MutationObserver( function(records) {
@@ -39,7 +39,7 @@
                 }
             });
         });
-        observer.observe(document.querySelector('cp-color-picker'), { attributes: true });
+        observer.observe(document.querySelector('wcia-color-picker'), { attributes: true });
     </script>
 </body>
 </html>

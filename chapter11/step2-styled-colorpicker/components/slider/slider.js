@@ -90,6 +90,6 @@ export default class Slider extends HTMLElement {
     }
 }
 
-if (!customElements.get('cp-slider')) {
-    customElements.define('cp-slider', Slider);
+if (!customElements.get('wcia-slider')) {
+    customElements.define('wcia-slider', Slider);
 }

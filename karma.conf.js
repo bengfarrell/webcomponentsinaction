@@ -17,8 +17,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      './chapter12/components/**/test/karma-test.js',
-      './chapter12/components/**/*.js'
+      'chapter12and13/components/**/test/karma-test.js',
+      'chapter12and13/components/**/*.js'
     ],
 
 
@@ -29,7 +29,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        './chapter12/components/**/*.js': ['rollup']  // ADD preprocessors
+        './chapter12and13/components/**/*.js': ['rollup']  // ADD preprocessors
     },
 
     rollupPreprocessor: {

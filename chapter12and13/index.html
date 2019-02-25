@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Color Picker Component</title>
+    <link rel="stylesheet" type="text/css" href="vars.css">
+    <script type="module" src="components/colorpicker/src/colorpicker.js"></script>
+    <script src="https://unpkg.com/@webcomponents/custom-elements"></script>
+    <style>
+        h1 {
+            font-family: sans-serif;
+            font-weight: bolder;
+            color: white;
+            text-shadow:
+                    -1px -1px 0 #000,
+                    1px -1px 0 #000,
+                    -1px 1px 0 #000,
+                    1px 1px 0 #000;
+        }
+    </style>
+</head>
+<body>
+    <wcia-color-picker class="modal" hex="#7687db" alpha="75"></wcia-color-picker>
+
+    <h1>Transparency</h1>
+    <script>
+        document.body.style.backgroundColor = document.querySelector('wcia-color-picker').getAttribute('hex');
+        document.querySelector('h1').style.opacity = document.querySelector('wcia-color-picker').getAttribute('alpha');
+
+
+        const observer = new MutationObserver( function(records) {
+            records.forEach( rec => {
+                switch (rec.attributeName) {
+                    case 'hex':
+                        document.body.style.backgroundColor = rec.target.hex;
+                        break;
+
+                    case 'alpha':
+                        document.querySelector('h1').style.opacity = rec.target.alpha / 100;
+                }
+            });
+        });
+        observer.observe(document.querySelector('wcia-color-picker'), { attributes: true });
+    </script>
+</body>
+</html>

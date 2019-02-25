@@ -1,0 +1,142 @@
+<html>
+<head>
+    <title>Slider</title>
+
+    <script>
+        class Slider extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = '<div class="bg-overlay"></div><div class="thumb"></div>';
+
+                document.addEventListener('mousemove', e => this.eventHandler(e));
+                document.addEventListener('mouseup', e => this.eventHandler(e));
+                this.addEventListener('mousedown', e => this.eventHandler(e));
+
+                this.refreshSlider(this.getAttribute('value'));
+                this.setColor(this.getAttribute('backgroundcolor'));
+            }
+
+            static get observedAttributes() {
+                return ['value', 'backgroundcolor'];
+            }
+
+            attributeChangedCallback(name, oldVal, newValue) {
+                switch (name) {
+                    case 'value':
+                        this.refreshSlider(newValue);
+                        break;
+
+                    case 'backgroundcolor':
+                        this.setColor(newValue);
+                        break;
+                }
+            }
+
+            set value(val) {
+                this.setAttribute('value', val);
+            }
+
+            get value() {
+                return this.getAttribute('value');
+            }
+
+            set backgroundcolor(val) {
+                this.setAttribute('backgroundcolor', val);
+            }
+
+            get backgroundcolor() {
+                return this.getAttribute('backgroundcolor');
+            }
+
+            setColor(color) {
+                if (this.querySelector('.bg-overlay')) {
+                    this.querySelector('.bg-overlay').style.background = `linear-gradient(to right, ${color} 0%, ${color}00 100%)`;
+                }
+            }
+
+            refreshSlider(value) {
+                if (this.querySelector('.thumb')) {
+                    this.querySelector('.thumb').style.left = (value / 100 * this.offsetWidth - this.querySelector('.thumb').offsetWidth / 2) + 'px';
+                }
+            }
+
+            updateX(x) {
+                let hPos = x - this.querySelector('.thumb').offsetWidth/2;
+                if (hPos > this.offsetWidth) {
+                    hPos = this.offsetWidth;
+                }
+                if (hPos < 0) {
+                    hPos = 0;
+                }
+                this.value = (hPos / this.offsetWidth) * 100;
+            }
+
+            eventHandler(e) {
+                const bounds = this.getBoundingClientRect();
+                const x = e.clientX - bounds.left;
+
+                switch (e.type) {
+                    case 'mousedown':
+                        this.isDragging = true;
+                        this.updateX(x);
+                        this.refreshSlider(this.value);
+                        break;
+
+                    case 'mouseup':
+                        this.isDragging = false;
+                        break;
+
+                    case 'mousemove':
+                        if (this.isDragging) {
+                            this.updateX(x);
+                            this.refreshSlider(this.value);
+                        }
+                        break;
+                }
+            }
+        }
+
+        if (!customElements.get('wcia-slider')) {
+            customElements.define('wcia-slider', Slider);
+        }
+
+    </script>
+
+    <style>
+        wcia-slider {
+            display: inline-block;
+            position: relative;
+            border-radius: 3px;
+            height: 50px;
+            width: 500px;
+            background-image: linear-gradient(45deg, #ccc 25%, transparent 25%),linear-gradient(-45deg, #ccc 25%, transparent 25%),linear-gradient(45deg, transparent 75%, #ccc 75%),linear-gradient(-45deg, transparent 75%, #ccc 75%);
+            background-size: 16px 16px;
+            background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+        }
+
+        .bg-overlay {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            border-radius: 3px;
+            background: linear-gradient(to right, #ff0000 0%, #ff000000 100%);
+        }
+
+        .thumb {
+            margin-top: -1px;
+            left: 100px;
+            width: 5px;
+            height: calc(100% - 5px);
+            position: absolute;
+            border-style: solid;
+            border-width: 3px;
+            border-color: white;
+            border-radius: 3px;
+            pointer-events: none;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+    </style>
+</head>
+<body>
+<wcia-slider backgroundcolor="#0000ff" value="70"></wcia-slider>
+</body>
+</html>

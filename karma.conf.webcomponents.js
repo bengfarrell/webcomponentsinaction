@@ -17,10 +17,10 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      './chapter12/components/**/src/*.js',
+      'chapter12and13/components/**/src/*.js',
       './node_modules/karma-web-components/framework.js',
         {
-            pattern: './chapter12/components/**/test/karma-wc-test.html',
+            pattern: './chapter12and13/components/**/test/karma-wc-test.html',
             watched: true,
             included: false // <--- THIS PART IS IMPORTANT!!!
         }
@@ -34,7 +34,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        './chapter12/components/**/*.js': ['rollup']  // ADD preprocessors
+        './chapter12and13/components/**/*.js': ['rollup']  // ADD preprocessors
     },
 
     rollupPreprocessor: {

@@ -24,11 +24,11 @@ export default {
         return `<div class="container">  
                     <div class="row">
                         <div class="slider-container">
-                            <cp-slider id="hue-slider" value="50"></cp-slider>
-                            <cp-slider id="transparency-slider" value="0"></cp-slider>
+                            <wcia-slider id="hue-slider" value="50"></wcia-slider>
+                            <wcia-slider id="transparency-slider" value="0"></wcia-slider>
                         </div>
                         
-                        <cp-coord-picker x="50" y="50" id="saturation-brightness"></cp-coord-picker>
+                        <wcia-coord-picker x="50" y="50" id="saturation-brightness"></wcia-coord-picker>
                     </div>
    
                     <div class="row">

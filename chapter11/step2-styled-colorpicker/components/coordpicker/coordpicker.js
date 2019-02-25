@@ -105,6 +105,6 @@ export default class CoordPicker extends HTMLElement {
     }
 }
 
-if (!customElements.get('cp-coord-picker')) {
-    customElements.define('cp-coord-picker', CoordPicker);
+if (!customElements.get('wcia-coord-picker')) {
+    customElements.define('wcia-coord-picker', CoordPicker);
 }

@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="../../../../node_modules/web-component-tester/browser.js"></script>
+    <script type="module" src="../src/colorpicker.js"></script>
+
+    <style>
+        wcia-color-picker {
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+<wcia-color-picker hex="#000000" alpha="0"></wcia-color-picker>
+<script>
+    const colorpicker = document.body.querySelector('wcia-color-picker');
+
+    suite('color picker', function() {
+        test('colorpicker get initial color state', function () {
+            assert.equal(colorpicker.root.querySelector('.textInputR').value, 0);
+            assert.equal(colorpicker.root.querySelector('.textInputG').value, 0);
+            assert.equal(colorpicker.root.querySelector('.textInputB').value, 0);
+            assert.equal(colorpicker.root.querySelector('.textInputA').value, 0);
+        });
+
+        test('colorpicker set color to red', function () {
+            colorpicker.hex = '#ff0000';
+            assert.equal(colorpicker.root.querySelector('.textInputR').value, 255);
+            assert.equal(colorpicker.root.querySelector('.textInputG').value, 0);
+            assert.equal(colorpicker.root.querySelector('.textInputB').value, 0);
+            assert.equal(colorpicker.root.querySelector('.textInputA').value, 0);
+        });
+
+        test('colorpicker set color to blue', function () {
+            colorpicker.hex = '#0000ff';
+            assert.equal(colorpicker.root.querySelector('.textInputR').value, 0);
+            assert.equal(colorpicker.root.querySelector('.textInputG').value, 0);
+            assert.equal(colorpicker.root.querySelector('.textInputB').value, 255);
+            assert.equal(colorpicker.root.querySelector('.textInputA').value, 0);
+        });
+
+        test('colorpicker set alpha', function () {
+            colorpicker.alpha = 50;
+            assert.equal(colorpicker.root.querySelector('.textInputA').value, 50);
+        });
+    });
+
+</script>
+</body>
+</html>
