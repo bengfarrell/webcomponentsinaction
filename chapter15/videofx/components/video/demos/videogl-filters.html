@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+        <title>Demo: Copy to Canvas</title>
+        <script type="module" src="../glvideo.js"></script>
+
+        <style>
+            wcia-glvideo {
+                width: 250px;
+                height: 250px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h2>Demo: Apply WebGL Filter</h2>
+        <p>
+            Apply WebGL Filter - possible glfilters are "sepia", "greyscale", "sobel_edge_detection", "freichen_edge_detection", "freichen_inverted", and "sobel_inverted"
+        </p>
+        <wcia-glvideo
+                useCamera
+                useCanvasForDisplay
+                canvasRefreshInterval="10" useWebGL='{"filter": "freichen_inverted"}'>
+        </wcia-glvideo>
+    </body>
+</html>

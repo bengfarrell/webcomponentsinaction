@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>Demo: Take a snapshot and diff the Camera feed against it</title>
+    <script type="module" src="../glvideo.js"></script>
+
+
+    <script id="2d-vertex-shader" type="x-shader/x-fragment">
+        attribute vec2 a_position;
+        attribute vec2 a_texCoord;
+        uniform vec2 u_resolution;
+        varying vec2 v_texCoord;
+        uniform vec2 offset;
+
+        void main() {
+            vec2 zeroToOne = a_position / u_resolution;
+            vec2 zeroToTwo = zeroToOne * 2.0;
+            vec2 clipSpace = zeroToTwo - 1.0 + offset;
+            gl_Position = vec4(clipSpace.x * 1.0, clipSpace.y * -1.0, 0.0, 1.0);
+            v_texCoord = a_texCoord;
+        }
+    </script>
+
+    <script id="2d-fragment-shader" type="x-shader/x-fragment">
+        precision mediump float;
+        varying vec2 v_texCoord;
+
+        uniform sampler2D u_image0;
+
+        void main(void) {
+            vec4 sourcePixel = texture2D(u_image0, v_texCoord);
+            float multiply = 1.0;
+            vec2 center = vec2(0.5, 0.5);
+
+            float dist = distance(v_texCoord, center);
+            gl_FragColor = (0.6-dist) * sourcePixel;
+        }
+    </script>
+
+    <style>
+        wcia-glvideo {
+            width: 640px;
+            height: 480px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+<h2>Demo: Take a snapshot and diff the Camera feed against it</h2>
+
+<wcia-glvideo
+        useCamera
+        useWebGL
+        useCanvasForDisplay
+        canvasRefreshInterval="10">
+</wcia-glvideo>
+
+<script type="module">
+    import Shaders from '../filters/webgl/shaders.js';
+    import Constants from '../filters/webgl/constants.js';
+
+    var video = document.querySelector('wcia-glvideo');
+    video.webglProperties.vertexShader = document.getElementById('2d-vertex-shader').text;
+    video.webglProperties.fragmentShader = document.getElementById('2d-fragment-shader').text;
+</script>
+</body>
+</html>

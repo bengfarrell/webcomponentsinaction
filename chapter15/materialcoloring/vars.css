@@ -1,0 +1,31 @@
+:root {
+    --text-xsmall: .5em;
+    --text-small: .7em;
+    --text-medium: 1em;
+    --text-large: 1.3em;
+    --text-xlarge: 1.5em;
+
+    --color-pureblack: black;
+    --color-black: #2a2a2a;
+    --color-lightblack: #4a4a4a;
+    --color-darkgrey: #6a6a6a;
+    --color-grey: #7a7a7a;
+    --color-lightgrey: #9a9a9a;
+    --color-darkwhite: #dadada;
+    --color-white: #fafafa;
+    --color-purewhite: #ffffff;
+
+    --text-color: var(--color-lightblack);
+    --text-inverted-color: var(--color-white);
+
+    --border-color: var(--color-lightblack);
+    --border-color-light: var(--color-darkwhite);
+    --border-inverted-color: var(--color-white);
+    --background-color: var(--color-white);
+    --background-inverted-color: var(--color-lightblack);
+
+    --border-radius: 6px;
+    --border-width-thick: 3px;
+    --border-width: 1px;
+    --padding-medium: 5px;
+}

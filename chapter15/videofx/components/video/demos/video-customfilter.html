@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Video Camera Demo</title>
+    <script type="module" src="../video.js"></script>
+
+    <style>
+        wcia-video {
+            width: 640px;
+            height: 480px;
+        }
+    </style>
+</head>
+
+<body>
+    <wcia-video
+            frameDataMode="imagedata"
+            canvasRefreshInterval="50"
+            useCamera
+            useCanvasForDisplay>
+    </wcia-video>
+
+    <p>Amount of snow</p>
+    <input type="range" min="0" step=".01" max="1" value="0.7" oninput="snow = event.target.value">
+
+    <script>
+        var snow = .7;
+
+        const customfilter = function(pxs) {
+            for (var c = 0; c < pxs.data.length; c+=4) {
+                if (Math.random() < snow) {
+                    pxs.data[c] = Math.random() * 255;
+                    pxs.data[c+1] = Math.random() * 255;
+                    pxs.data[c+2] = Math.random() * 255;
+                    pxs.data[c+3] = 0;
+                }
+            }
+            return pxs;
+        };
+
+        document.querySelector('wcia-video').addEventListener('frameupdate', function(event) {
+            var data = event.detail;
+            data.canvascontext.putImageData( customfilter(data.framedata), 0, 0, 0, 0, data.width, data.height );
+        });
+    </script>
+</body>
+</html>

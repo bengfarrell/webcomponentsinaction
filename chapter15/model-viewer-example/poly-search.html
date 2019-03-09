@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Poly Search with Preview</title>
+    <script src="model-viewer.js"></script>
+    <script src="poly-search.js" type="module"></script>
+
+    <script>
+
+    </script>
+    <style>
+        model-viewer {
+            width: 50vw;
+            height: 50vh;
+        }
+    </style>
+</head>
+<body>
+<model-viewer src="./Astronaut.glb" controls></model-viewer>
+
+<label>Enter search term: </label><input type="text" onchange="updatePolySearch(event)" />
+<br /><br />
+
+<poly-search apikey="<your api key here>"
+             format="GLTF2"
+             thumbheight="50"
+             backgroundcolor="#99ffff"
+             baseuri="https://poly.googleapis.com/v1/assets"
+             searchterm="parrot">
+</poly-search>
+
+<script>
+    function updatePolySearch(event) {
+        document.querySelector('poly-search').searchTerm = event.target.value;
+    }
+
+    document.querySelector('poly-search').addEventListener('click', e => {
+        const model = e.target.getAttribute('gltf');
+        document.querySelector('model-viewer').setAttribute('src', model);
+    });
+</script>
+
+</body>
+</html>

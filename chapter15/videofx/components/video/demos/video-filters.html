@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>Demo: Video Filters</title>
+    <script type="module" src="../video.js"></script>
+
+    <style>
+        wcia-video {
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+<h2>Demo: Video Filters</h2>
+<p>
+    Set a video filter
+</p>
+<wcia-video useCamera useCanvasForDisplay canvasRefreshInterval="50"></wcia-video>
+
+<script type="module">
+    import Filters from '../filters/canvas/filters.js';
+    document.querySelector('wcia-video').canvasFilter = Filters.toBlackAndWhite;
+    //document.querySelector('wcia-video').canvasFilter = Filters.saturate;
+    //document.querySelector('wcia-video').canvasFilter = Filters.toGrayscale
+</script>
+</body>
+</html>
