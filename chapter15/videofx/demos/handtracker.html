@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>Demo: Handtracker</title>
+    <script type="module" src="../handtracker.js"></script>
+    <script src="../handtrack.min.js"></script>
+
+    <style>
+        wcia-handtracker {
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+<h2>Demo: Hand Tracker <span id="loc"></span></h2>
+<wcia-handtracker useCamera useCanvasForDisplay canvasRefreshInterval="50"></wcia-handtracker>
+
+<script>
+    document.addEventListener('onHandLocation', function(e) {
+        if (e.detail.points.length > 0) {
+            document.getElementById('loc').innerText = parseInt(e.detail.points[0].x) + ',' + parseInt(e.detail.points[0].y);
+        }
+    })
+</script>
+</body>
+</html>
