@@ -11,8 +11,8 @@
                 document.addEventListener('mouseup', e => this.eventHandler(e));
                 this.addEventListener('mousedown', e => this.eventHandler(e));
 
-                this.refreshSlider(this.getAttribute('value'));
-                this.setColor(this.getAttribute('backgroundcolor'));
+                this.refreshSlider(this.value);
+                this.setColor(this.backgroundcolor);
             }
 
             static get observedAttributes() {
