@@ -4,8 +4,16 @@
         <script type="module" src="./components/app/app.js"></script>
         <link href="csshake.min.css" type="text/css" rel="stylesheet">
         <link href="main.css" type="text/css" rel="stylesheet">
+
+        <script>
+            function clicktostart() {
+                document.querySelector('.audio-fix').style.display = 'none';
+                document.querySelector('webharp-app').style.display = 'inline-block';
+            }
+        </script>
     </head>
     <body>
         <webharp-app strings="12"></webharp-app>
+        <div class="audio-fix" onclick="clicktostart()">Click Me To Start</div>
     </body>
 </html>
