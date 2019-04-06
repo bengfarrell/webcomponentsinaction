@@ -1,5 +1,5 @@
 import Template from './template.js';
-import Plan from "../../components/plan/plan.js";
+import Plan from "../plan/plan.js";
 import Exercise from '../exercise/exercise.js';
 
 export default class WorkoutCreatorApp extends HTMLElement {
