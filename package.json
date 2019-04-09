@@ -23,7 +23,7 @@
   },
 
   "special note for windows users": {
-    "message": "If using windows (without the linux subsystem), running karma like below does not quite work. You'll need to cd to the directory and then run karma, but also let karma know that the config is back at the root.",
+    "message": "If using windows (without the linux subsystem), running karma like below does not quite work. You'll need to cd to the directory and then run karma, but also let karma know that the config is back at the root. This works for Linux/OSX too, just looks a little ugly!",
     "new command": "cd node_modules/karma/bin && karma start ../../..karma.conf.js"
   },
 
