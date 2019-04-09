@@ -21,6 +21,12 @@
     "rollup": "^1.0.2",
     "web-component-tester": "^6.9.2"
   },
+
+  "special note for windows users": {
+    "message": "If using windows (without the linux subsystem), running karma like below does not quite work. You'll need to cd to the directory and then run karma, but also let karma know that the config is back at the root.",
+    "new command": "cd node_modules/karma/bin && karma start ../../..karma.conf.js"
+  },
+
   "scripts": {
     "karmatest": "./node_modules/karma/bin/karma start karma.conf.js",
     "karma-wc-test": "./node_modules/karma/bin/karma start karma.conf.webcomponents.js",
