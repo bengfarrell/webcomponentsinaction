@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Connected Callback</title>
+    <script>
+        class MyCustomTag extends HTMLElement {
+            constructor()	{
+                super();
+                alert('hi from MyCustomTags constructor');
+            }
+            connectedCallback() {
+                alert('hi from MyCustomTag connected callback');
+                this.innerHTML = '<h2>'+ this.getAttribute('title') + '</h2><button>click me</button>';
+            }
+        }
+
+        if (!customElements.get('my-custom-tag')) {
+            customElements.define('my-custom-tag', MyCustomTag);
+        }
+    </script>
+
+
+    <style>
+        my-custom-tag {
+            background-color: blue;
+            padding: 20px;
+            display: inline-block;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+<!-- Uncomment the below and both fire, but this is a good opportunity to follow along with the book
+ and trigger each -->
+<!--<my-custom-tag title="Another title"></my-custom-tag>-->
+</body>
+
+</html>

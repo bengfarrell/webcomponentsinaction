@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Connected Callback</title>
+    <script>
+        class MyCustomTag extends HTMLElement {
+            connectedCallback() {
+                alert('hi from MyCustomTag');
+                this.innerHTML = '<h2>'+ this.getAttribute('title') + '</h2><button>click me</button>';
+            }
+        }
+
+        if (!customElements.get('my-custom-tag')) {
+            customElements.define('my-custom-tag', MyCustomTag);
+        }
+    </script>
+
+    <style>
+        my-custom-tag {
+            background-color: blue;
+            padding: 20px;
+            display: inline-block;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+<my-custom-tag title="Another title"></my-custom-tag>
+</body>
+
+</html>
