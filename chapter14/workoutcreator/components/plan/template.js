@@ -21,10 +21,6 @@ export default {
 
     renderSavedPlans() {
         const saved = WorkoutPlanData.saved;
-        if (saved.length === 0) {
-            return '';
-        }
-
         let options = '<option value="none">Load a saved plan</option>';
         for (let c = 0; c < saved.length; c++) {
             options += `<option value="${saved[c]}">${saved[c]}</option>`;
