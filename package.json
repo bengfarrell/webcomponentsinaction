@@ -15,18 +15,20 @@
     "karma-chrome-launcher": "^2.2.0",
     "karma-firefox-launcher": "^1.1.0",
     "karma-mocha": "^1.3.0",
-    "karma-safari-launcher": "^1.0.0",
+    "karma-safarinative-launcher": "^1.1.0",
     "karma-web-components": "^1.0.4",
     "mocha": "^5.2.0",
     "rollup": "^1.0.2",
     "web-component-tester": "^6.9.2"
   },
-
   "special note for windows Git bash users": {
     "message": "If using git bash in windows (without the windows for linux subsystem), running karma like below does not quite work. You'll need to cd to the directory and then run karma, but also let karma know that the config is back at the root. This works for Linux/OSX too, just looks a little ugly!",
     "new command": "cd node_modules/karma/bin && karma start ../../..karma.conf.js"
   },
-
+  "note on Karma testing in safari":  {
+    "message": "while the Karma/Safari/Mojave issue doesn't appear to be completely solved yet in the main karma-safari-launcher, there is a workaround using karma-safarinative-launcher used above",
+    "messaeg": "ideally, we'd be using karma-safari-launcher: ^1.0.0 instead, and not having to specify custom launchers in the config"
+  },
   "scripts": {
     "karmatest": "./node_modules/karma/bin/karma start karma.conf.js",
     "karma-wc-test": "./node_modules/karma/bin/karma start karma.conf.webcomponents.js",

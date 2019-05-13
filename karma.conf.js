@@ -64,7 +64,17 @@ module.exports = function(config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
 
-    browsers: ['FirefoxHeadless', 'ChromeHeadless'],
+    browsers: ['FirefoxHeadless', 'ChromeHeadless', 'Safari'],
+
+    // defining custom launchers wouldn't be necessary if karma-safari-launcher worked, but due to an issue in Mojave:
+    // https://github.com/karma-runner/karma-safari-launcher/issues/29
+    // we're using an alternate karma-safarinative-launcher
+    // not sure if the original package works out a solution
+    customLaunchers: {
+      Safari: {
+          base: 'SafariNative'
+      }
+    },
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
