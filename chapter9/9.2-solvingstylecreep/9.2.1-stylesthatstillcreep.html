@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Styles that Still Creep</title>
+
+    <style>
+        .text {
+            font-size: 24px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+
+    <script>
+        class SampleComponent extends HTMLElement {
+            connectedCallback() {
+                const root = this.attachShadow({mode: 'open'});
+                root.innerHTML = `<span>Some Text</span>`;
+            }
+        }
+
+        if (!customElements.get('sample-component')) {
+            customElements.define('sample-component', SampleComponent);
+        }
+
+    </script>
+</head>
+<body class="text">
+<sample-component></sample-component>
+</body>
+</html>
