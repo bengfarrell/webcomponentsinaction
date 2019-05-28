@@ -18,13 +18,13 @@ export default {
                     <span id="label">${exercise.label}</span>
                     <div id="customize">
                         <label class="${exercise.time?'visible':'hidden'}">
-                            <input id="time" type="number" max="999" style="width:35px;" value="${Number(exercise.time)}"> seconds
+                            <input id="time" type="number" max="999" style="width:45px;" value="${Number(exercise.time)}"> seconds
                         </label>
                         <label class="${exercise.count?'visible':'hidden'}">
-                            <input id="count" type="number" max="99" style="width:25px;" value="${Number(exercise.count)}">
+                            <input id="count" type="number" max="99" style="width:35px;" value="${Number(exercise.count)}">
                         </label>
                         <label class="${exercise.sets?'visible':'hidden'}">x 
-                            <input id="sets" type="number" max="9" style="width:20px;" value="${Number(exercise.sets)}"> set(s)
+                            <input id="sets" type="number" max="9" style="width:30px;" value="${Number(exercise.sets)}"> set(s)
                         </label>
                     </div>
                     <span id="delete">x</span>
